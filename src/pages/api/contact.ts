@@ -16,6 +16,10 @@ function isValidEmail(email: string): boolean {
 }
 
 export const POST: APIRoute = async ({ request }) => {
+	const keyPreview = env.RESEND_API_KEY
+		? `length=${env.RESEND_API_KEY.length}, ends with "${env.RESEND_API_KEY.slice(-6)}"`
+		: 'MISSING or undefined';
+	console.log('RESEND_API_KEY diagnostic:', keyPreview);
 
 	let body: { name?: string; email?: string; message?: string };
 	try {
