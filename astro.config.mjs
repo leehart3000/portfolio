@@ -5,7 +5,6 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  adapter: cloudflare({
-    prerenderEnvironment: 'node',
-  }),
+	adapter: cloudflare(),
+	session: false,
 });
