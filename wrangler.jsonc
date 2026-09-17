@@ -19,5 +19,8 @@
 			"binding": "SESSION",
 			"id": "48872dc59e1d478fb0eda3ce928c5594"
 		}
-	]
+	],
+	"secrets": {
+		"required": ["RESEND_API_KEY"]
+	}
 }

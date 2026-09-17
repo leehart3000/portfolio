@@ -57,9 +57,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         if (response.ok) {
           if (data.emailSent) {
-            status.textContent = "Thanks — your message has been sent.";
+            status.textContent = "Thanks — your message has been emailed to me. If you don't hear back soon, please email me directly at lee@hartsoft.dev.";
           } else {
-            status.textContent = "Thanks — your message was received. If you don't hear back soon, please email me directly at lee@hartsoft.dev.";
+            status.textContent = "Thanks — your message has been recorded. If you don't hear back soon, please email me directly at lee@hartsoft.dev.";
           }
           form.reset();
         } else {

@@ -16,10 +16,6 @@ function isValidEmail(email: string): boolean {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-	const keyPreview = env.RESEND_API_KEY
-		? `length=${env.RESEND_API_KEY.length}, ends with "${env.RESEND_API_KEY.slice(-6)}"`
-		: 'MISSING or undefined';
-	console.log('RESEND_API_KEY diagnostic:', keyPreview);
 
 	let body: { name?: string; email?: string; message?: string };
 	try {
@@ -61,10 +57,10 @@ export const POST: APIRoute = async ({ request }) => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				from: 'HartSoft.Dev Contact Form <contact@hartsoft.dev>',
-				to: 'lee@hartsoft.dev',
+				from: 'HartSoft.Dev - Contact Form <contact@hartsoft.dev>',
+				to: 'contact@hartsoft.dev',
 				reply_to: email,
-				subject: `New contact form message from ${name}`,
+				subject: `Message from ${name}`,
 				text: `From: ${name} <${email}>\n\n${message}`,
 			}),
 		});
