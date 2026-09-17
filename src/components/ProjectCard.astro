@@ -1,0 +1,149 @@
+---
+import { techColors, defaultTechColor } from '../data/tech-colors';
+import { slugify } from '../lib/slugify';
+
+const statusMeta = {
+  mature: { label: 'Mature', emoji: '🌳' },
+  growing: { label: 'Growing', emoji: '🌱' },
+  seedling: { label: 'Seedling', emoji: '🌰' },
+};
+
+interface Props {
+  project: any;
+  linkTitle?: boolean;
+}
+
+const { project, linkTitle = false } = Astro.props;
+const detailHref = `/projects/${project.id}`;
+---
+
+<article>
+  <div class="project-header">
+    <div class="project-title-line">
+      {project.data.logo && (
+        <img class="project-logo" src={project.data.logo} alt="" />
+      )}
+      <h3>
+        {linkTitle ? (
+          <a href={detailHref}>{project.data.title}</a>
+        ) : (
+          project.data.title
+        )}
+      </h3>
+    </div>
+    <span class="status-badge">
+      Status: {statusMeta[project.data.status].label} {statusMeta[project.data.status].emoji}
+    </span>
+  </div>
+
+  <p>{project.data.summary}</p>
+
+  <p class="links-line">
+    {project.data.liveUrl && (
+      <>🔗&nbsp;Live site: <a href={project.data.liveUrl} target="_blank" rel="noopener noreferrer">{project.data.liveUrl}</a><br /></>
+    )}
+    {!project.data.liveUrl && project.data.demoUrl && (
+      <>🧪&nbsp;Demo site: <a href={project.data.demoUrl} target="_blank" rel="noopener noreferrer">{project.data.demoUrl}</a><br /></>
+    )}
+    {project.data.repoUrl && (
+      project.data.repoIsPrivate ? (
+        <>🔒&nbsp;Private repo: <a href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">{project.data.repoUrl}</a></>
+      ) : (
+        <>📂&nbsp;Public repo: <a href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">{project.data.repoUrl}</a></>
+      )
+    )}
+  </p>
+
+  <fieldset class="tech-fieldset">
+    <legend>Applied tech:</legend>
+    {[...project.data.tech].sort((a, b) => a.localeCompare(b)).map((t: string) => (
+      <a href={`/tech/${slugify(t)}`} class="tech-badge" style={`--badge-color: ${techColors[t] ?? defaultTechColor}`}>
+        {t}
+      </a>
+    ))}
+  </fieldset>
+
+  {linkTitle && (
+    <p><span class="more-arrow">→</span>&nbsp;<a href={detailHref}>Learn more about {project.data.title}</a></p>
+  )}
+</article>
+
+<style>
+  article {
+    padding-bottom: 1.5em;
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1em;
+    margin-bottom: 0.2em;
+  }
+  .project-header + p {
+    margin-top: 0;
+  }
+  .project-title-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .project-logo {
+    width: 1.4em;
+    height: 1.4em;
+    object-fit: contain;
+  }
+  .status-badge {
+    display: inline-block;
+    font-size: 0.8em;
+    padding: 0.15em 0.6em;
+    border-radius: 999px;
+    background: #d9f2d9;
+    color: #256029;
+    white-space: nowrap;
+  }
+  :root[data-theme="dark"] .status-badge {
+    background: #2b3d2d;
+    color: #d9f2d9;
+  }
+  .tech-badge {
+    position: relative;
+    display: inline-block;
+    font-size: 0.8em;
+    padding: 0.15em 0.6em;
+    margin: 0.15em;
+    border-radius: 999px;
+    color: #333;
+    text-decoration: none;
+    isolation: isolate;
+  }
+  .tech-badge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--badge-color);
+    z-index: -1;
+  }
+  :root[data-theme="dark"] .tech-badge::before {
+    filter: brightness(0.6) saturate(0.85);
+  }
+  :root[data-theme="dark"] .tech-badge {
+    color: var(--color-bg);
+  }
+  .tech-fieldset {
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.5em 0.8em;
+    margin: 0.5em 0;
+  }
+  .tech-fieldset legend {
+    padding: 0 0.4em;
+    font-size: 0.85em;
+    color: var(--color-text);
+  }
+  .links-line {
+    line-height: 1.8;
+  }
+</style>
