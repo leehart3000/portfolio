@@ -14,6 +14,10 @@
 		{
 			"binding": "CONTACT_SUBMISSIONS",
 			"id": "2b70c51d578a4d30be1e69d62e5be17c"
+		},
+		{
+			"binding": "SESSIONS",
+			"id": "48872dc59e1d478fb0eda3ce928c5594"
 		}
 	]
 }
