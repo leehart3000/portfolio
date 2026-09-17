@@ -1,0 +1,49 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { slugify } from '../../lib/slugify';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allProjects = await getCollection('projects');
+
+const techNames = new Set<string>();
+allProjects.forEach((p) => p.data.tech.forEach((t) => techNames.add(t)));
+
+const sortedTechNames = Array.from(techNames).sort((a, b) => a.localeCompare(b));
+
+const techList = await Promise.all(
+  sortedTechNames.map(async (name) => {
+    const entry = await getEntry('tech', slugify(name));
+    return {
+      name,
+      slug: slugify(name),
+      description: entry?.data.description ?? null,
+    };
+  })
+);
+---
+
+<BaseLayout title="Lee Hart - Recent Tech">
+  <h1>Recent Tech</h1>
+  <p>
+    Every technology currently in use across my recent projects, in one
+    place. Click through to see which projects use each one.
+  </p>
+
+  {techList.map((t) => (
+    <article class="tech-entry">
+      <h3><a href={`/tech/${t.slug}`}>{t.name}</a></h3>
+      {t.description && <p>{t.description}</p>}
+    </article>
+  ))}
+</BaseLayout>
+
+<style>
+  .tech-entry {
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .tech-entry h3 {
+    margin-bottom: 0.2em;
+  }
+</style>

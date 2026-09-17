@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from '../components/ProjectCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allProjects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout title="Lee Hart - Recent Projects">
+	<h1>Recent Projects</h1>
+	<p>
+		A selection of what I'm currently building — from live, working
+		platforms through to early-stage experiments. Each entry links
+		through to its live site or repository where available, along
+		with the technologies involved.
+	</p>
+	{allProjects.map((project) => <ProjectCard project={project} linkTitle={true} />)}
+</BaseLayout>

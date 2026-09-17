@@ -1,0 +1,51 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { slugify } from '../../lib/slugify';
+import ProjectCard from '../../components/ProjectCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection('projects');
+
+  const techNames = new Set<string>();
+  allProjects.forEach((p) => p.data.tech.forEach((t) => techNames.add(t)));
+
+  return Array.from(techNames).map((techName) => {
+    const matchingProjects = allProjects
+      .filter((p) => p.data.tech.includes(techName))
+      .sort((a, b) => a.data.order - b.data.order);
+
+    return {
+      params: { tech: slugify(techName) },
+      props: { techName, matchingProjects },
+    };
+  });
+}
+
+const { techName, matchingProjects } = Astro.props;
+const techEntry = await getEntry('tech', slugify(techName));
+const description = techEntry?.data.description ?? 'A technology used across one or more of the projects below.';
+const url = techEntry?.data.url;
+---
+
+<BaseLayout title={`Lee Hart - ${techName} projects`}>
+  <h1>{techName}</h1>
+  <div class="tech-intro">
+    <p>{description}</p>
+    {url && (
+      <p>🔗&nbsp;Learn more about {techName}: <a href={url} target="_blank" rel="noopener noreferrer">{url}</a></p>
+    )}
+  </div>
+
+  <h2 class="projects-heading">Recent projects using {techName}</h2>
+  {matchingProjects.map((project) => <ProjectCard project={project} linkTitle={true} />)}
+</BaseLayout>
+
+<style>
+  .tech-intro {
+    margin-bottom: 2em;
+  }
+  .projects-heading {
+    margin-bottom: 0.3em;
+  }
+</style>
