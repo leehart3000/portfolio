@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Lee Hart - Contact">
+	<h1>Contact</h1>
+	<p>
+		Get in touch directly, or use the form below — messages sent through
+		the form come straight to my inbox.
+	</p>
+
+	<p class="contact-links">
+		✉️&nbsp;Email: <a href="mailto:lee@hartsoft.dev">lee@hartsoft.dev</a><br />
+		🐙&nbsp;GitHub: <a href="https://github.com/leehart3000" target="_blank" rel="noopener noreferrer">https://github.com/leehart3000</a><br />
+		🔗&nbsp;LinkedIn: <a href="https://www.linkedin.com/in/leehart3000" target="_blank" rel="noopener noreferrer">https://www.linkedin.com/in/leehart3000</a>
+	</p>
+
+	<form id="contact-form">
+		<label>
+			Name
+			<input type="text" name="name" required />
+		</label>
+		<label>
+			Email
+			<input type="email" name="email" required />
+		</label>
+		<label>
+			Message
+			<textarea name="message" rows="6" required></textarea>
+		</label>
+		<button type="submit">Send message</button>
+		<p id="form-status" role="status"></p>
+	</form>
+
+	<script is:inline>
+		const form = document.getElementById('contact-form');
+		const status = document.getElementById('form-status');
+
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			status.textContent = 'Sending…';
+
+			const formData = new FormData(form);
+			const payload = {
+				name: formData.get('name'),
+				email: formData.get('email'),
+				message: formData.get('message'),
+			};
+
+			try {
+				const response = await fetch('/api/contact', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(payload),
+				});
+				const data = await response.json();
+
+        if (response.ok) {
+          if (data.emailSent) {
+            status.textContent = "Thanks — your message has been sent.";
+          } else {
+            status.textContent = "Thanks — your message was received. If you don't hear back soon, please email me directly at lee@hartsoft.dev.";
+          }
+          form.reset();
+        } else {
+          status.textContent = data.error ?? 'Something went wrong. Please try again.';
+        }
+
+			} catch {
+				status.textContent = 'Network error — please try again.';
+			}
+		});
+	</script>
+
+	<style>
+		.contact-links {
+			line-height: 1.8;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			gap: 1em;
+			max-width: 480px;
+			margin-top: 1.5em;
+		}
+		label {
+			display: flex;
+			flex-direction: column;
+			gap: 0.3em;
+			font-size: 0.9em;
+		}
+		input,
+		textarea {
+			font: inherit;
+			padding: 0.5em;
+			border: 1px solid var(--color-border);
+			border-radius: 4px;
+			background: var(--color-bg);
+			color: var(--color-text);
+		}
+    button {
+      align-self: flex-start;
+      font: inherit;
+      padding: 0.5em 1.2em;
+      border: none;
+      border-radius: 4px;
+      background: var(--color-hart);
+      color: white;
+      cursor: pointer;
+    }
+    :root[data-theme="dark"] button {
+      background: var(--color-dev);
+    }
+		#form-status {
+			font-size: 0.9em;
+			min-height: 1.2em;
+		}
+	</style>
+</BaseLayout>
