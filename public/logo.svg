@@ -1,0 +1,16 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path
+    d="M50,85
+       C50,85 12,55 12,32
+       C12,17 23,7 36,7
+       C43,7 50,12 50,22
+       C50,12 57,7 64,7
+       C77,7 88,17 88,32
+       C88,55 50,85 50,85
+       Z"
+    fill="none"
+    stroke="#B03A3A"
+    stroke-width="3"
+    stroke-dasharray="6 5"
+  />
+</svg>

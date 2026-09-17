@@ -1,17 +1,21 @@
 ---
-const name = "Lee Hart";
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{name}</title>
-	</head>
-	<body>
-		<h1>{name}</h1>
-	</body>
-</html>
+<BaseLayout title="Lee Hart - Software Development">
+	<h1>Lee Hart - Software Development</h1>
+	<p>
+		Hi, I'm Lee Hart. I'm a software developer working across web platforms, data-driven
+		applications, and scientific tooling. I build things end-to-end —
+		from backend architecture and APIs through to clean, usable
+		frontends — with a particular interest in projects that combine
+		software engineering with data, science, or education.
+	</p>
+	<p>
+		This site is a running record of what I'm building, from active
+		client and personal projects through to early-stage experiments.
+		Take a look at my <a href="/projects">recent projects</a> to see
+		what I've been working on.
+	</p>
+	<!-- TODO: headshot image, likely alongside or above this intro text -->
+</BaseLayout>
