@@ -9,5 +9,11 @@
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	"kv_namespaces": [
+		{
+			"binding": "CONTACT_SUBMISSIONS",
+			"id": "2b70c51d578a4d30be1e69d62e5be17c"
+		}
+	]
 }
