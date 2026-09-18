@@ -9,6 +9,7 @@ repoUrl: "https://github.com/leehart3000/portfolio"
 repoIsPrivate: false
 startDate: 2026-06-06
 featured: true
+logo: "/logo.svg"
 ---
 
 This site is itself one of the projects on display — built with Astro, deployed on Cloudflare Workers, and developed in the open. It's a living example of the tools and approach described elsewhere on this page.

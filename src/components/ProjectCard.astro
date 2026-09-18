@@ -95,17 +95,28 @@ const detailHref = `/projects/${project.id}`;
     object-fit: contain;
   }
   .status-badge {
+    position: relative;
+    isolation: isolate;
     display: inline-block;
     font-size: 0.8em;
     padding: 0.15em 0.6em;
     border-radius: 999px;
-    background: #d9f2d9;
-    color: #256029;
+    color: #333;
     white-space: nowrap;
   }
+  .status-badge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: #d9f2d9;
+    z-index: -1;
+  }
+  :root[data-theme="dark"] .status-badge::before {
+    filter: brightness(0.6) saturate(0.85);
+  }
   :root[data-theme="dark"] .status-badge {
-    background: #2b3d2d;
-    color: #d9f2d9;
+    color: var(--color-bg);
   }
   .tech-badge {
     position: relative;
