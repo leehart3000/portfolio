@@ -24,14 +24,14 @@ const year = new Date().getFullYear();
 	<body>
 		<header class="site-header">
 			<a href="/" class="brand">
-				<img src="/logo.svg" alt="" width="40" height="40" />
+				<img src="/logo.svg" alt="" width="40" height="40" class="logo-img" />
 				<span class="wordmark">
 					<span class="hart">Hart</span><span class="soft">Soft</span><span class="dot">.</span><span class="dev">Dev</span>
 				</span>
 			</a>
       <nav class="site-nav">
-        <a href="/projects"><span class="nav-icon">📁&nbsp;</span>Recent Projects</a>
-        <a href="/tech"><span class="nav-icon">🛠️&nbsp;</span>Recent Tech</a>
+        <a href="/projects"><span class="nav-icon">📁&nbsp;</span>Recent&nbsp;Projects</a>
+        <a href="/tech"><span class="nav-icon">🛠️&nbsp;</span>Recent&nbsp;Tech</a>
         <a href="/contact"><span class="nav-icon">✉️&nbsp;</span>Contact</a>
 				<button id="theme-toggle" aria-label="Toggle dark mode">
 					<span id="theme-toggle-icon">🌙</span> <span id="theme-toggle-label">Dark</span>
@@ -44,11 +44,11 @@ const year = new Date().getFullYear();
 		</main>
 
 		<footer class="site-footer">
-			<span class="copyright">© {year} Lee Hart</span>
+			<span class="copyright">©&nbsp;{year}&nbsp;Lee&nbsp;Hart</span>
       <nav class="site-nav">
-        <a href="/projects"><span class="nav-icon">📁&nbsp;</span>Recent Projects</a>
-        <a href="/tech"><span class="nav-icon">🛠️&nbsp;</span>Recent Tech</a>
-        <a href="/contact"><span class="nav-icon">✉️&nbsp;</span>Contact</a>
+      <a href="/projects"><span class="nav-icon">📁&nbsp;</span>Recent&nbsp;Projects</a>
+      <a href="/tech"><span class="nav-icon">🛠️&nbsp;</span>Recent&nbsp;Tech</a>
+      <a href="/contact"><span class="nav-icon">✉️&nbsp;</span>Contact</a>
 			</nav>
 		</footer>
 
@@ -86,7 +86,8 @@ const year = new Date().getFullYear();
       --color-dev: #0F3D6B;
       --color-dot: #000000;
       --color-border: #ddd;
-      --color-heading: #1a1a1a;
+      --color-heading: #4d4d4d;
+      --color-image-border: #333333;
     }
     :root[data-theme="dark"] {
       --color-bg: #14181d;
@@ -98,6 +99,7 @@ const year = new Date().getFullYear();
       --color-dot: #ffffff;
       --color-border: #333;
       --color-heading: #cfcfcf;
+      --color-image-border: #cccccc;
     }
     * {
       box-sizing: border-box;
@@ -139,6 +141,9 @@ const year = new Date().getFullYear();
     h1, h2, h3 {
       color: var(--color-heading);
     }
+    h1 {
+      margin-bottom: 0.4em;
+    }
   </style>
   <style>
     .site-header,
@@ -152,17 +157,21 @@ const year = new Date().getFullYear();
       flex-shrink: 0;
     }
     .site-header {
-      align-items: flex-end;
+      align-items: baseline;
       border-bottom: 1px solid var(--color-border);
     }
     .site-footer {
-      align-items: center;
+      align-items: baseline;
       border-top: 1px solid var(--color-border);
       font-size: 0.9em;
     }
+    .logo-img {
+      position: relative;
+      top: 0.35em;
+    }
     .brand {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 0.5em;
       text-decoration: none;
       font-weight: 600;
@@ -191,6 +200,7 @@ const year = new Date().getFullYear();
     .site-nav {
       display: flex;
       align-items: baseline;
+      flex-wrap: wrap;
       gap: 1.2em;
     }
     .site-nav a {
@@ -209,6 +219,7 @@ const year = new Date().getFullYear();
       padding: 0;
       cursor: pointer;
       color: var(--color-hart);
+      white-space: nowrap;
     }
     :root[data-theme="dark"] #theme-toggle {
       color: var(--color-dev);
@@ -222,10 +233,13 @@ const year = new Date().getFullYear();
     .brand {
       font-size: 1.4rem;
     }
-    .site-nav a,
-    #theme-toggle,
-    .copyright {
+    .site-header .site-nav a,
+    #theme-toggle {
       font-size: 0.85rem;
+    }
+    .site-footer .site-nav a,
+    .copyright {
+      font-size: 0.72rem;
     }
     .nav-icon {
       text-decoration: none;
@@ -233,6 +247,10 @@ const year = new Date().getFullYear();
     }
     .site-nav a:hover .nav-icon {
       text-decoration: none;
+    }
+    .site-nav a,
+    .copyright {
+      white-space: nowrap;
     }
     @media (max-width: 480px) {
       .site-header,
