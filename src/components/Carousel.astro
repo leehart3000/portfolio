@@ -1,0 +1,115 @@
+---
+interface Props {
+  images: string[];
+  alt: string;
+}
+
+const { images, alt } = Astro.props;
+const carouselId = `carousel-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+{images.length > 0 && (
+  <div class="carousel" id={carouselId} data-index="0">
+    <div class="carousel-track">
+      {images.map((src, i) => (
+        <img src={src} alt={`${alt} — screenshot ${i + 1}`} class="carousel-image" data-slide-index={i} />
+      ))}
+    </div>
+    {images.length > 1 && (
+      <>
+        <button class="carousel-arrow carousel-prev" aria-label="Previous screenshot">&#8249;</button>
+        <button class="carousel-arrow carousel-next" aria-label="Next screenshot">&#8250;</button>
+        <div class="carousel-dots">
+          {images.map((_, i) => (
+            <span class="carousel-dot" data-dot-index={i}></span>
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+)}
+
+<style>
+  .carousel {
+    position: relative;
+    margin: 1em 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-bg-header);
+  }
+  .carousel-track {
+    position: relative;
+    aspect-ratio: 8 / 5;
+  }
+  .carousel-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+  .carousel-image.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.45);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    font-size: 1.3em;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .carousel-prev {
+    left: 0.6em;
+  }
+  .carousel-next {
+    right: 0.6em;
+  }
+  .carousel-dots {
+    position: absolute;
+    bottom: 0.6em;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.4em;
+  }
+  .carousel-dot {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .carousel-dot.active {
+    background: white;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.carousel').forEach((carousel) => {
+    const images = carousel.querySelectorAll<HTMLImageElement>('.carousel-image');
+    const dots = carousel.querySelectorAll<HTMLSpanElement>('.carousel-dot');
+    let index = 0;
+
+    function show(i: number) {
+      index = (i + images.length) % images.length;
+      images.forEach((img, n) => img.classList.toggle('active', n === index));
+      dots.forEach((dot, n) => dot.classList.toggle('active', n === index));
+    }
+
+    carousel.querySelector('.carousel-prev')?.addEventListener('click', () => show(index - 1));
+    carousel.querySelector('.carousel-next')?.addEventListener('click', () => show(index + 1));
+    dots.forEach((dot, n) => dot.addEventListener('click', () => show(n)));
+
+    show(0);
+  });
+</script>
