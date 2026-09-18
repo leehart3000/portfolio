@@ -9,6 +9,10 @@ repoUrl: "https://github.com/leehart3000/malaria-observer"
 startDate: 2026-01-01
 featured: true
 logo: "/logos/malaria-observer.svg"
+screenshots:
+  - "/screenshots/placeholder-1.svg"
+  - "/screenshots/placeholder-2.svg"
+  - "/screenshots/placeholder-3.svg"
 ---
 
 Malaria Observer is a health analytics platform built on Django and Wagtail, aimed at presenting malaria-related data in an accessible, navigable way. It's in active early development, with the core content management and data presentation layers taking shape.

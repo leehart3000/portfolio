@@ -10,6 +10,9 @@ repoIsPrivate: true
 startDate: 2026-01-01
 featured: true
 logo: "/logos/elementorium-light.svg"
+screenshots:
+  - "/screenshots/placeholder-4.svg"
+  - "/screenshots/placeholder-5.svg"
 ---
 
 Elementorium is a headless e-commerce platform following the JAMstack approach — a decoupled storefront backed by an API-driven content and commerce layer. It's in active early development, focused on getting the core storefront and product data flow working cleanly.
