@@ -2,7 +2,7 @@
 title: "Malaria Observer"
 status: "growing"
 order: 1
-summary: "A Django Wagtail platform for tracking and visualising malaria-related health data, built as an early-stage HAT (htmx, Alpine, Tailwind) website."
+summary: "Malaria Observer is a Django Wagtail platform for tracking and visualising malaria-related health data, built as an early-stage HAT (htmx, Alpine, Tailwind) website."
 tech: ["Django", "Wagtail", "Python", "PostgreSQL", "Tailwind CSS", "GitHub Actions", "Google Cloud Run", "Google Cloud Storage", "Docker"]
 liveUrl: "https://malaria.observer"
 repoUrl: "https://github.com/leehart3000/malaria-observer"

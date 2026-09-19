@@ -2,7 +2,7 @@
 title: "Elementorium"
 status: "growing"
 order: 2
-summary: "A JAMstack headless e-commerce platform, built for speed, flexibility, and clean separation between storefront and backend."
+summary: "Elementorium uses a JAMstack headless e-commerce platform, built for speed, flexibility, and clean separation between storefront and backend."
 tech: ["Astro", "Tailwind CSS", "Stripe", "Cloudflare", "Bun", "GitHub Actions"]
 liveUrl: "https://elementorium.co.uk"
 repoUrl: "https://github.com/leehart3000/elementorium"

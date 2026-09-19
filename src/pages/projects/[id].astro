@@ -16,6 +16,7 @@ const { Content } = await render(project);
 ---
 
 <BaseLayout title={`Lee Hart - ${project.data.title}`}>
+  <p class="back-link"><span class="more-arrow">←</span>&nbsp;<a href="/projects">Recent projects</a></p>
   <ProjectCard project={project} />
   <h2 class="detail-heading">More about this project</h2>
   <Content />
@@ -24,5 +25,8 @@ const { Content } = await render(project);
 <style>
   .detail-heading {
     font-size: 1.1em;
+  }
+  .more-arrow {
+    text-decoration: none;
   }
 </style>

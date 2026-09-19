@@ -1,8 +1,8 @@
 ---
 title: "HartSoft.Dev"
-status: "growing"
+status: "mature"
 order: 3
-summary: "This portfolio site itself — an Astro site on Cloudflare Workers, built openly as a working example of the stack in action."
+summary: "HartSoft.Dev (this portfolio site itself) is an Astro site on Cloudflare Workers, built openly as a working example of the stack in action."
 tech: ["Astro", "Cloudflare"]
 liveUrl: "https://hartsoft.dev"
 repoUrl: "https://github.com/leehart3000/portfolio"

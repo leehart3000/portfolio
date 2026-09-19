@@ -16,5 +16,6 @@ const allProjects = (await getCollection('projects')).sort(
 		through to its live site or repository where available, along
 		with the technologies involved.
 	</p>
+	<hr />
 	{allProjects.map((project) => <ProjectCard project={project} linkTitle={true} />)}
 </BaseLayout>
