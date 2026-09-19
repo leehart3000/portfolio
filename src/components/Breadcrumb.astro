@@ -1,0 +1,28 @@
+---
+interface Props {
+  parentLabel: string;
+  parentHref: string;
+  current: string;
+}
+
+const { parentLabel, parentHref, current } = Astro.props;
+---
+
+<p class="breadcrumb">
+  <a href={parentHref}>{parentLabel}</a>
+  <span class="breadcrumb-sep">&gt;</span>
+  <span class="breadcrumb-current">{current}</span>
+</p>
+
+<style>
+  .breadcrumb {
+    font-size: 0.9em;
+  }
+  .breadcrumb-sep {
+    margin: 0 0.4em;
+    color: var(--color-text);
+  }
+  .breadcrumb-current {
+    color: var(--color-text);
+  }
+</style>

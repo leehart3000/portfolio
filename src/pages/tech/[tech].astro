@@ -4,14 +4,18 @@ import { slugify } from '../../lib/slugify';
 import ProjectCard from '../../components/ProjectCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import EmploymentCard from '../../components/EmploymentCard.astro';
+import CertificateCard from '../../components/CertificateCard.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 export async function getStaticPaths() {
   const allProjects = await getCollection('projects');
   const allEmployments = await getCollection('employments');
+  const allCertificates = await getCollection('certificates');
 
   const techNames = new Set<string>();
   allProjects.forEach((p) => p.data.tech.forEach((t) => techNames.add(t)));
   allEmployments.forEach((e) => e.data.tech.forEach((t) => techNames.add(t)));
+  allCertificates.forEach((c) => c.data.tech.forEach((t) => techNames.add(t)));
 
   return Array.from(techNames).map((techName) => {
     const matchingProjects = allProjects
@@ -20,21 +24,25 @@ export async function getStaticPaths() {
     const matchingEmployments = allEmployments
       .filter((e) => e.data.tech.includes(techName))
       .sort((a, b) => a.data.order - b.data.order);
+    const matchingCertificates = allCertificates
+      .filter((c) => c.data.tech.includes(techName))
+      .sort((a, b) => a.data.order - b.data.order);
 
     return {
       params: { tech: slugify(techName) },
-      props: { techName, matchingProjects, matchingEmployments },
+      props: { techName, matchingProjects, matchingEmployments, matchingCertificates },
     };
   });
 }
 
-const { techName, matchingProjects, matchingEmployments } = Astro.props;
+const { techName, matchingProjects, matchingEmployments, matchingCertificates } = Astro.props;
 const techEntry = await getEntry('tech', slugify(techName));
 const description = techEntry?.data.description ?? 'A technology used across one or more of the projects below.';
 const url = techEntry?.data.url;
 ---
 
 <BaseLayout title={`Lee Hart - ${techName} projects`}>
+  <Breadcrumb parentLabel="Tech" parentHref="/tech" current={techName} />
   <h1>{techName}</h1>
   <div class="tech-intro">
     <p>{description}</p>
@@ -45,15 +53,31 @@ const url = techEntry?.data.url;
 
   {matchingProjects.length > 0 && (
     <>
-      <h2 class="projects-heading">Recent projects using {techName}</h2>
+      <div class="section-heading-row">
+        <h2 id="projects" class="projects-heading">Recent projects using {techName}</h2>
+        <a href="/projects" class="section-all-link">📁&nbsp;All&nbsp;Recent&nbsp;Projects</a>
+      </div>
       {matchingProjects.map((project) => <ProjectCard project={project} linkTitle={true} />)}
     </>
   )}
 
   {matchingEmployments.length > 0 && (
     <>
-      <h2 class="projects-heading">Employments applying {techName}</h2>
+      <div class="section-heading-row">
+        <h2 id="employments" class="projects-heading">Employments applying {techName}</h2>
+        <a href="/employments" class="section-all-link">💼&nbsp;All&nbsp;Employments</a>
+      </div>
       {matchingEmployments.map((employment) => <EmploymentCard employment={employment} linkTitle={true} />)}
+    </>
+  )}
+
+  {matchingCertificates.length > 0 && (
+    <>
+      <div class="section-heading-row">
+        <h2 id="certificates" class="projects-heading">Certificates covering {techName}</h2>
+        <a href="/certificates" class="section-all-link">📚&nbsp;All&nbsp;Certificates</a>
+      </div>
+      {matchingCertificates.map((certificate) => <CertificateCard certificate={certificate} />)}
     </>
   )}
 
@@ -65,5 +89,20 @@ const url = techEntry?.data.url;
   }
   .projects-heading {
     margin-bottom: 0.3em;
+  }
+  .section-heading-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+  .section-all-link {
+    font-size: 0.85em;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .section-all-link:hover {
+    text-decoration: underline;
   }
 </style>

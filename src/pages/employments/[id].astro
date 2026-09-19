@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import EmploymentCard from '../../components/EmploymentCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 export async function getStaticPaths() {
   const allEmployments = await getCollection('employments');
@@ -16,7 +17,7 @@ const { Content } = await render(employment);
 ---
 
 <BaseLayout title={`Lee Hart - ${employment.data.name}`}>
-  <p class="back-link"><span class="more-arrow">←</span>&nbsp;<a href="/employments">Recent employments</a></p>
+  <Breadcrumb parentLabel="Employments" parentHref="/employments" current={employment.data.name} />
   <EmploymentCard employment={employment} />
   <h2 class="detail-heading">More about this role</h2>
   <Content />

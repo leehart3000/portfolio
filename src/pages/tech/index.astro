@@ -4,9 +4,13 @@ import { slugify } from '../../lib/slugify';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const allProjects = await getCollection('projects');
+const allEmployments = await getCollection('employments');
+const allCertificates = await getCollection('certificates');
 
 const techNames = new Set<string>();
 allProjects.forEach((p) => p.data.tech.forEach((t) => techNames.add(t)));
+allEmployments.forEach((e) => e.data.tech.forEach((t) => techNames.add(t)));
+allCertificates.forEach((c) => c.data.tech.forEach((t) => techNames.add(t)));
 
 const sortedTechNames = Array.from(techNames).sort((a, b) => a.localeCompare(b));
 
@@ -17,6 +21,9 @@ const techList = await Promise.all(
       name,
       slug: slugify(name),
       description: entry?.data.description ?? null,
+      hasProjects: allProjects.some((p) => p.data.tech.includes(name)),
+      hasEmployments: allEmployments.some((e) => e.data.tech.includes(name)),
+      hasCertificates: allCertificates.some((c) => c.data.tech.includes(name)),
     };
   })
 );
@@ -28,10 +35,16 @@ const techList = await Promise.all(
     The languages, frameworks, and platforms I've been using across my
     recent projects — click through to see which projects use each one.
   </p>
-
   {techList.map((t) => (
     <article class="tech-entry">
-      <h3><a href={`/tech/${t.slug}`}>{t.name}</a></h3>
+      <div class="tech-entry-header">
+        <h3><a href={`/tech/${t.slug}`}>{t.name}</a></h3>
+        <span class="tech-entry-links">
+          {t.hasProjects && <a href={`/tech/${t.slug}#projects`} class="cross-link" style="--badge-color: #D0E8F5">📁&nbsp;Projects</a>}
+          {t.hasEmployments && <a href={`/tech/${t.slug}#employments`} class="cross-link" style="--badge-color: #E4D9F2">💼&nbsp;Employments</a>}
+          {t.hasCertificates && <a href={`/tech/${t.slug}#certificates`} class="cross-link" style="--badge-color: #FCEFC7">📚&nbsp;Certificates</a>}
+        </span>
+      </div>
       {t.description && <p>{t.description}</p>}
     </article>
   ))}
@@ -39,11 +52,64 @@ const techList = await Promise.all(
 
 <style>
   .tech-entry {
-    padding-bottom: 1em;
-    margin-bottom: 1em;
-    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-header);
+    border-radius: 8px;
+    padding: 1em 1.2em;
+    margin-bottom: 1.2em;
+  }
+  .tech-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.6em;
   }
   .tech-entry h3 {
     margin-bottom: 0.2em;
+  }
+  .tech-entry-links {
+    display: flex;
+    gap: 1em;
+    font-size: 0.85em;
+  }
+  .tech-entry-links {
+    display: flex;
+    gap: 0.5em;
+    flex-wrap: wrap;
+  }
+  .cross-link {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    font-size: 0.8em;
+    padding: 0.15em 0.6em;
+    border-radius: 999px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .cross-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--badge-color);
+    z-index: -1;
+  }
+  :root[data-theme="dark"] .cross-link::before {
+    filter: brightness(0.6) saturate(0.85);
+  }
+  :root[data-theme="dark"] .cross-link {
+    color: var(--color-bg);
+  }
+  .cross-link:hover {
+    text-decoration: none;
+    filter: brightness(0.95);
+  }
+  :root[data-theme="dark"] .cross-link:hover {
+    filter: brightness(1.15);
+  }
+  .tech-entry-links a:hover {
+    text-decoration: underline;
   }
 </style>
