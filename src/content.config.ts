@@ -50,4 +50,29 @@ const employments = defineCollection({
   }),
 });
 
-export const collections = { projects, tech, employments };
+const certificates = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/certificates' }),
+  schema: z.object({
+    name: z.string(),
+    provider: z.string(),
+    providerUrl: z.string().url().optional(),
+    type: z.string(),
+    url: z.string().url().optional(),
+    logo: z.string().optional(),
+    summary: z.string(),
+    tech: z.array(z.string()).default([]),
+    completionDate: z.string(),
+    duration: z.string().optional(),
+    relatedCertificates: z.array(z.object({
+      name: z.string(),
+      slug: z.string(),
+    })).optional(),
+    status: z.object({
+      label: z.string(),
+      emoji: z.string(),
+    }).optional(),
+    order: z.number().default(0),
+  }),
+});
+
+export const collections = { projects, tech, employments, certificates };

@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import CertificateCard from '../components/CertificateCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allCertificates = (await getCollection('certificates')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout title="Lee Hart - Certificates">
+  <h1>Certificates</h1>
+  <p>
+    Formal qualifications and completed courses relevant to my work,
+    alongside the technologies covered by each.
+  </p>
+  {allCertificates.map((certificate) => <CertificateCard certificate={certificate} />)}
+</BaseLayout>
