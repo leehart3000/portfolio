@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { statusMeta, type StatusKey } from '../../data/status-meta';
+
+const statuses = Object.keys(statusMeta) as StatusKey[];
+---
+
+<BaseLayout title="Lee Hart - Project Statuses">
+  <h1>Project Statuses</h1>
+  <p>
+    Every project on this site is labelled with one of the statuses below,
+    reflecting how established it is right now — not a judgement of quality,
+    just a snapshot of where it stands.
+  </p>
+
+  {statuses.map((s) => (
+    <article class="status-entry">
+      <h3>
+        <a href={`/project-statuses/${s}`} class="status-badge" style={`--badge-color: ${statusMeta[s].color}`}>
+          {statusMeta[s].label} {statusMeta[s].emoji}
+        </a>
+      </h3>
+      <p>{statusMeta[s].description}</p>
+    </article>
+  ))}
+</BaseLayout>
+
+<style>
+  .status-entry {
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .status-badge {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    font-size: 0.85em;
+    padding: 0.2em 0.7em;
+    border-radius: 999px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .status-badge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--badge-color);
+    z-index: -1;
+  }
+  .status-badge:hover {
+    text-decoration: none;
+    filter: brightness(0.95);
+  }
+  :root[data-theme="dark"] .status-badge::before {
+    filter: brightness(0.6) saturate(0.85);
+  }
+  :root[data-theme="dark"] .status-badge {
+    color: var(--color-bg);
+  }
+  :root[data-theme="dark"] .status-badge:hover {
+    filter: brightness(1.15);
+  }
+</style>

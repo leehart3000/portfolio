@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from '../../components/ProjectCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { statusMeta, type StatusKey } from '../../data/status-meta';
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection('projects');
+  return (Object.keys(statusMeta) as StatusKey[]).map((status) => ({
+    params: { status },
+    props: {
+      status,
+      matchingProjects: allProjects
+        .filter((p) => p.data.status === status)
+        .sort((a, b) => a.data.order - b.data.order),
+    },
+  }));
+}
+
+const { status, matchingProjects } = Astro.props as { status: StatusKey; matchingProjects: any[] };
+const meta = statusMeta[status];
+const allStatuses = Object.keys(statusMeta) as StatusKey[];
+
+const introText = meta.description.charAt(0).toLowerCase() + meta.description.slice(1);
+---
+
+<BaseLayout title={`Lee Hart - Project Status: ${meta.label}`}>
+  <nav class="status-nav">
+    <a href="/project-statuses" class="status-nav-all">Project Statuses:</a>
+    {allStatuses.map((s) => (
+      <a href={`/project-statuses/${s}`} class="status-badge" style={`--badge-color: ${statusMeta[s].color}`}>
+        {statusMeta[s].label} {statusMeta[s].emoji}
+      </a>
+    ))}
+  </nav>
+
+  <h1>Project Status: {meta.label} {meta.emoji}</h1>
+  <p>The following projects are {introText}</p>
+  <hr />
+  {matchingProjects.map((project) => <ProjectCard project={project} linkTitle={true} />)}
+</BaseLayout>
+
+<style>
+  .status-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6em;
+    font-size: 0.9em;
+    margin-bottom: 1em;
+  }
+  .status-badge {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    padding: 0.2em 0.7em;
+    border-radius: 999px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .status-badge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--badge-color);
+    z-index: -1;
+  }
+  .status-badge:hover {
+    text-decoration: none;
+    filter: brightness(0.95);
+  }
+  :root[data-theme="dark"] .status-badge::before {
+    filter: brightness(0.6) saturate(0.85);
+  }
+  :root[data-theme="dark"] .status-badge {
+    color: var(--color-bg);
+  }
+  :root[data-theme="dark"] .status-badge:hover {
+    filter: brightness(1.15);
+  }
+</style>
