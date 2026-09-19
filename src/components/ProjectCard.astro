@@ -30,7 +30,7 @@ const detailHref = `/projects/${project.id}`;
     {linkTitle && (
       <a href={detailHref} class="more-info-link">
         <span class="info-icon">i</span>
-        <span class="more-info-text">more info</span>
+        <span class="more-info-text">more about this project</span>
       </a>
     )}
     <a href={`/project-statuses/${project.data.status}`} class="status-badge" style={`--badge-color: ${statusMeta[project.data.status].color}`}>

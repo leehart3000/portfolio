@@ -3,26 +3,32 @@ import { getCollection, getEntry } from 'astro:content';
 import { slugify } from '../../lib/slugify';
 import ProjectCard from '../../components/ProjectCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import EmploymentCard from '../../components/EmploymentCard.astro';
 
 export async function getStaticPaths() {
   const allProjects = await getCollection('projects');
+  const allEmployments = await getCollection('employments');
 
   const techNames = new Set<string>();
   allProjects.forEach((p) => p.data.tech.forEach((t) => techNames.add(t)));
+  allEmployments.forEach((e) => e.data.tech.forEach((t) => techNames.add(t)));
 
   return Array.from(techNames).map((techName) => {
     const matchingProjects = allProjects
       .filter((p) => p.data.tech.includes(techName))
       .sort((a, b) => a.data.order - b.data.order);
+    const matchingEmployments = allEmployments
+      .filter((e) => e.data.tech.includes(techName))
+      .sort((a, b) => a.data.order - b.data.order);
 
     return {
       params: { tech: slugify(techName) },
-      props: { techName, matchingProjects },
+      props: { techName, matchingProjects, matchingEmployments },
     };
   });
 }
 
-const { techName, matchingProjects } = Astro.props;
+const { techName, matchingProjects, matchingEmployments } = Astro.props;
 const techEntry = await getEntry('tech', slugify(techName));
 const description = techEntry?.data.description ?? 'A technology used across one or more of the projects below.';
 const url = techEntry?.data.url;
@@ -37,8 +43,20 @@ const url = techEntry?.data.url;
     )}
   </div>
 
-  <h2 class="projects-heading">Recent projects using {techName}</h2>
-  {matchingProjects.map((project) => <ProjectCard project={project} linkTitle={true} />)}
+  {matchingProjects.length > 0 && (
+    <>
+      <h2 class="projects-heading">Recent projects using {techName}</h2>
+      {matchingProjects.map((project) => <ProjectCard project={project} linkTitle={true} />)}
+    </>
+  )}
+
+  {matchingEmployments.length > 0 && (
+    <>
+      <h2 class="projects-heading">Employments applying {techName}</h2>
+      {matchingEmployments.map((employment) => <EmploymentCard employment={employment} linkTitle={true} />)}
+    </>
+  )}
+
 </BaseLayout>
 
 <style>

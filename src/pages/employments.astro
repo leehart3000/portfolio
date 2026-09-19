@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import EmploymentCard from '../components/EmploymentCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allEmployments = (await getCollection('employments')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<BaseLayout title="Lee Hart - Employments">
+  <h1>Employments</h1>
+  <p>
+    A summary of where I've worked, the roles I've held, and the
+    technologies I've used along the way. Click through to any employer
+    for more detail on what the work involved.
+  </p>
+  <hr />
+  {allEmployments.map((employment) => <EmploymentCard employment={employment} linkTitle={true} />)}
+</BaseLayout>

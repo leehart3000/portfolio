@@ -1,4 +1,3 @@
-// src/content.config.ts
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
@@ -30,4 +29,25 @@ const tech = defineCollection({
   }),
 });
 
-export const collections = { projects, tech };
+const employments = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/employments' }),
+  schema: z.object({
+    name: z.string(),
+    url: z.string().url().optional(),
+    logo: z.string().optional(),
+    summary: z.string(),
+    tech: z.array(z.string()),
+    jobTitles: z.array(z.object({
+      title: z.string(),
+      start: z.string(),
+      end: z.string().optional(),
+    })),
+    status: z.object({
+      label: z.string(),
+      emoji: z.string(),
+    }).optional(),
+    order: z.number().default(0),
+  }),
+});
+
+export const collections = { projects, tech, employments };
