@@ -15,6 +15,5 @@ const allEmployments = (await getCollection('employments')).sort(
     technologies I've used along the way. Click through to any employer
     for more detail on what the work involved.
   </p>
-  <hr />
   {allEmployments.map((employment) => <EmploymentCard employment={employment} linkTitle={true} />)}
 </BaseLayout>

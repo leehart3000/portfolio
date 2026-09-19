@@ -36,7 +36,6 @@ const introText = meta.description.charAt(0).toLowerCase() + meta.description.sl
 
   <h1>Project Status: {meta.label} {meta.emoji}</h1>
   <p>The following projects are {introText}</p>
-  <hr />
   {matchingProjects.map((project) => <ProjectCard project={project} linkTitle={true} />)}
 </BaseLayout>
 
