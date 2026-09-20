@@ -10,6 +10,10 @@ repoIsPrivate: false
 startDate: 2026-06-06
 featured: true
 logo: "/logo.svg"
+screenshots:
+  - "/screenshots/hartsoft-dev-home.jpg"
+  - "/screenshots/hartsoft-dev-projects.jpg"
+  - "/screenshots/hartsoft-dev-tech.jpg"
 ---
 
 This site is itself one of the projects on display — built with Astro, deployed on Cloudflare Workers, and developed in the open. It's a living example of the tools and approach described elsewhere on this page.
