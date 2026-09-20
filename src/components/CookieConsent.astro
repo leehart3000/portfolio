@@ -6,7 +6,7 @@ const GA_MEASUREMENT_ID = 'G-BTKPVYL1NH';
   <p>
     This site uses Google Analytics to understand how visitors use it.
     No analytics cookies are set unless you accept.
-    <a href="/privacy">Read the privacy policy</a>.
+    Please read the <a href="/privacy">privacy policy</a>.
   </p>
   <div class="cookie-banner-actions">
     <button id="cookie-accept" type="button">Accept</button>
@@ -16,11 +16,6 @@ const GA_MEASUREMENT_ID = 'G-BTKPVYL1NH';
 
 <style>
   .cookie-banner {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 500;
     background: var(--color-bg-header);
     border-top: 1px solid var(--color-border);
     padding: 0.8em 1.25em;
@@ -49,13 +44,8 @@ const GA_MEASUREMENT_ID = 'G-BTKPVYL1NH';
     color: var(--color-text);
     cursor: pointer;
   }
-  #cookie-accept {
-    background: var(--color-dev);
-    color: white;
-    border-color: var(--color-dev);
-  }
-  :root[data-theme="dark"] #cookie-accept {
-    color: #14181d;
+  .cookie-banner-actions button:hover {
+    background: var(--color-border);
   }
 </style>
 
@@ -73,10 +63,6 @@ const GA_MEASUREMENT_ID = 'G-BTKPVYL1NH';
     gtag('config', measurementId);
   }
 
-  function setBannerOffset(height) {
-    document.documentElement.style.setProperty('--cookie-banner-offset', height ? `${height}px` : '0px');
-  }
-
   const consent = localStorage.getItem('cookie-consent');
 
   if (consent === 'accepted') {
@@ -84,19 +70,16 @@ const GA_MEASUREMENT_ID = 'G-BTKPVYL1NH';
   } else if (consent !== 'declined') {
     const banner = document.getElementById('cookie-banner');
     banner.hidden = false;
-    setBannerOffset(banner.offsetHeight);
 
     document.getElementById('cookie-accept').addEventListener('click', () => {
       localStorage.setItem('cookie-consent', 'accepted');
       loadGoogleAnalytics(GA_MEASUREMENT_ID);
       banner.hidden = true;
-      setBannerOffset(0);
     });
 
     document.getElementById('cookie-decline').addEventListener('click', () => {
       localStorage.setItem('cookie-consent', 'declined');
       banner.hidden = true;
-      setBannerOffset(0);
     });
   }
 </script>
