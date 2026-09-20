@@ -41,7 +41,7 @@ const detailHref = `/projects/${project.id}`;
   <p>{project.data.summary}</p>
 
   {linkTitle && project.data.screenshots && project.data.screenshots.length > 0 && (
-    <div class="thumbnail-group">
+    <div class="thumbnail-group" data-title={project.data.title}>
       {project.data.screenshots.map((src: string, i: number) => (
         <img
           src={src}
@@ -50,10 +50,6 @@ const detailHref = `/projects/${project.id}`;
           class="thumbnail-item"
         />
       ))}
-      <div class="lightbox-overlay">
-        <button class="lightbox-close" aria-label="Close">&times;</button>
-        <img class="lightbox-image" src="" alt="" />
-      </div>
     </div>
   )}
 
@@ -246,60 +242,15 @@ const detailHref = `/projects/${project.id}`;
   .thumbnail-item:hover {
     opacity: 0.8;
   }
-  .lightbox-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  .lightbox-overlay.open {
-    display: flex;
-  }
-  .lightbox-image {
-    max-width: 90vw;
-    max-height: 85vh;
-    border-radius: 6px;
-  }
-  .lightbox-close {
-    position: absolute;
-    top: 1em;
-    right: 1.2em;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2em;
-    line-height: 1;
-    cursor: pointer;
-  }
 </style>
 <script>
   document.querySelectorAll<HTMLElement>('.thumbnail-group').forEach((group) => {
-    const overlay = group.querySelector<HTMLElement>('.lightbox-overlay');
-    const overlayImage = group.querySelector<HTMLImageElement>('.lightbox-image');
-    const closeBtn = group.querySelector<HTMLElement>('.lightbox-close');
+    const thumbs = Array.from(group.querySelectorAll<HTMLImageElement>('.thumbnail-item'));
+    const srcs = thumbs.map((t) => t.src);
+    const title = group.dataset.title ?? '';
 
-    function open(src: string, alt: string) {
-      if (!overlay || !overlayImage) return;
-      overlayImage.src = src;
-      overlayImage.alt = alt;
-      overlay.classList.add('open');
-    }
-    function close() {
-      overlay?.classList.remove('open');
-    }
-
-    group.querySelectorAll<HTMLImageElement>('.thumbnail-item').forEach((thumb) => {
-      thumb.addEventListener('click', () => open(thumb.src, thumb.alt));
-    });
-    closeBtn?.addEventListener('click', close);
-    overlay?.addEventListener('click', (e) => {
-      if (e.target === overlay) close();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') close();
+    thumbs.forEach((thumb, i) => {
+      thumb.addEventListener('click', () => window.openLightbox(srcs, i, title));
     });
   });
 </script>

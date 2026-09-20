@@ -1,4 +1,7 @@
 ---
+import CookieConsent from '../components/CookieConsent.astro';
+import Lightbox from '../components/Lightbox.astro';
+
 interface Props {
 	title: string;
 }
@@ -30,7 +33,7 @@ const year = new Date().getFullYear();
 			</a>
       <nav class="site-nav">
         <a href="/projects"><span class="nav-icon">📁&nbsp;</span>Projects</a>
-        <a href="/tech"><span class="nav-icon">🛠️&nbsp;</span>Applied&nbsp;Tech</a>
+        <a href="/tech"><span class="nav-icon">🛠️&nbsp;</span>Known&nbsp;Tech</a>
         <a href="/employments"><span class="nav-icon">💼&nbsp;</span>Employments</a>
         <a href="/certificates"><span class="nav-icon">📚&nbsp;</span>Certificates</a>
         <a href="/contact"><span class="nav-icon">✉️&nbsp;</span>Contact</a>
@@ -45,10 +48,10 @@ const year = new Date().getFullYear();
 		</main>
 
 		<footer class="site-footer">
-			<span class="copyright">©&nbsp;{year}&nbsp;Lee&nbsp;Hart</span>
+			<span class="copyright">©&nbsp;{year}&nbsp;Lee&nbsp;Hart&nbsp;·&nbsp;<a href="/privacy">Privacy</a></span>
       <nav class="site-nav">
         <a href="/projects"><span class="nav-icon">📁&nbsp;</span>Projects</a>
-        <a href="/tech"><span class="nav-icon">🛠️&nbsp;</span>Applied&nbsp;Tech</a>
+        <a href="/tech"><span class="nav-icon">🛠️&nbsp;</span>Known&nbsp;Tech</a>
         <a href="/employments"><span class="nav-icon">💼&nbsp;</span>Employments</a>
         <a href="/certificates"><span class="nav-icon">📚&nbsp;</span>Certificates</a>
         <a href="/contact"><span class="nav-icon">✉️&nbsp;</span>Contact</a>
@@ -78,6 +81,8 @@ const year = new Date().getFullYear();
 				updateToggleLabel(next);
 			});
 		</script>
+    <Lightbox />
+    <CookieConsent />
 	</body>
   <style is:global>
     :root {
@@ -91,6 +96,7 @@ const year = new Date().getFullYear();
       --color-border: #ddd;
       --color-heading: #4d4d4d;
       --color-image-border: #333333;
+      --cookie-banner-offset: 0px;
     }
     :root[data-theme="dark"] {
       --color-bg: #14181d;
@@ -120,6 +126,9 @@ const year = new Date().getFullYear();
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       font-size: 16px;
       line-height: 1.7;
+    }
+    body {
+      padding-bottom: var(--cookie-banner-offset, 0px);
     }
     main {
       flex: 1 0 auto;

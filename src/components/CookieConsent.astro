@@ -1,0 +1,102 @@
+---
+const GA_MEASUREMENT_ID = 'G-BTKPVYL1NH';
+---
+
+<div id="cookie-banner" class="cookie-banner" hidden>
+  <p>
+    This site uses Google Analytics to understand how visitors use it.
+    No analytics cookies are set unless you accept.
+    <a href="/privacy">Read the privacy policy</a>.
+  </p>
+  <div class="cookie-banner-actions">
+    <button id="cookie-accept" type="button">Accept</button>
+    <button id="cookie-decline" type="button">Decline</button>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 500;
+    background: var(--color-bg-header);
+    border-top: 1px solid var(--color-border);
+    padding: 0.8em 1.25em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    font-size: 0.9em;
+  }
+  .cookie-banner p {
+    margin: 0;
+    flex: 1 1 300px;
+  }
+  .cookie-banner-actions {
+    display: flex;
+    gap: 0.6em;
+    flex-shrink: 0;
+  }
+  .cookie-banner-actions button {
+    font: inherit;
+    padding: 0.4em 1em;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+  #cookie-accept {
+    background: var(--color-dev);
+    color: white;
+    border-color: var(--color-dev);
+  }
+  :root[data-theme="dark"] #cookie-accept {
+    color: #14181d;
+  }
+</style>
+
+<script define:vars={{ GA_MEASUREMENT_ID }}>
+  function loadGoogleAnalytics(measurementId) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', measurementId);
+  }
+
+  function setBannerOffset(height) {
+    document.documentElement.style.setProperty('--cookie-banner-offset', height ? `${height}px` : '0px');
+  }
+
+  const consent = localStorage.getItem('cookie-consent');
+
+  if (consent === 'accepted') {
+    loadGoogleAnalytics(GA_MEASUREMENT_ID);
+  } else if (consent !== 'declined') {
+    const banner = document.getElementById('cookie-banner');
+    banner.hidden = false;
+    setBannerOffset(banner.offsetHeight);
+
+    document.getElementById('cookie-accept').addEventListener('click', () => {
+      localStorage.setItem('cookie-consent', 'accepted');
+      loadGoogleAnalytics(GA_MEASUREMENT_ID);
+      banner.hidden = true;
+      setBannerOffset(0);
+    });
+
+    document.getElementById('cookie-decline').addEventListener('click', () => {
+      localStorage.setItem('cookie-consent', 'declined');
+      banner.hidden = true;
+      setBannerOffset(0);
+    });
+  }
+</script>

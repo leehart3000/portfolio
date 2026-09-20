@@ -9,7 +9,7 @@ const carouselId = `carousel-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
 {images.length > 0 && (
-  <div class="carousel" id={carouselId} data-index="0">
+  <div class="carousel" id={carouselId} data-index="0" data-alt={alt}>
     <div class="carousel-track">
       {images.map((src, i) => (
         <img src={src} alt={`${alt} — screenshot ${i + 1}`} class="carousel-image" data-slide-index={i} />
@@ -111,5 +111,12 @@ const carouselId = `carousel-${Math.random().toString(36).slice(2, 9)}`;
     dots.forEach((dot, n) => dot.addEventListener('click', () => show(n)));
 
     show(0);
+
+    const track = carousel.querySelector('.carousel-track');
+    const altBase = (carousel as HTMLElement).dataset.alt ?? '';
+    track?.addEventListener('click', () => {
+      const srcs = Array.from(images).map((img) => img.src);
+      window.openLightbox(srcs, index, altBase);
+    });
   });
 </script>

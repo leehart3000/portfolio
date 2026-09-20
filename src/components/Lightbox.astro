@@ -1,0 +1,114 @@
+<div id="lightbox-overlay" class="lightbox-overlay" hidden>
+  <button id="lightbox-close" class="lightbox-close" aria-label="Close">&times;</button>
+  <button id="lightbox-prev" class="lightbox-arrow lightbox-prev" aria-label="Previous screenshot">&#8249;</button>
+  <img id="lightbox-image" class="lightbox-image" src="" alt="" />
+  <button id="lightbox-next" class="lightbox-arrow lightbox-next" aria-label="Next screenshot">&#8250;</button>
+</div>
+
+<style>
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-overlay:not([hidden]) {
+    display: flex;
+  }
+  .lightbox-image {
+    max-width: 85vw;
+    max-height: 85vh;
+    border-radius: 6px;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 1em;
+    right: 1.2em;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2em;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .lightbox-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 2.6em;
+    height: 2.6em;
+    font-size: 1.6em;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .lightbox-prev {
+    left: 1em;
+  }
+  .lightbox-next {
+    right: 1em;
+  }
+</style>
+
+<script>
+  interface LightboxImage {
+    src: string;
+    alt: string;
+  }
+
+  let currentImages: LightboxImage[] = [];
+  let currentIndex = 0;
+
+  const overlay = document.getElementById('lightbox-overlay') as HTMLDivElement;
+  const imageEl = document.getElementById('lightbox-image') as HTMLImageElement;
+  const prevBtn = document.getElementById('lightbox-prev') as HTMLButtonElement;
+  const nextBtn = document.getElementById('lightbox-next') as HTMLButtonElement;
+
+  function show(i: number) {
+    currentIndex = (i + currentImages.length) % currentImages.length;
+    imageEl.src = currentImages[currentIndex].src;
+    imageEl.alt = currentImages[currentIndex].alt;
+  }
+
+  function updateArrowVisibility() {
+    const multiple = currentImages.length > 1;
+    prevBtn.style.display = multiple ? '' : 'none';
+    nextBtn.style.display = multiple ? '' : 'none';
+  }
+
+  declare global {
+    interface Window {
+      openLightbox: (srcs: string[], startIndex: number, altBase: string) => void;
+    }
+  }
+
+  window.openLightbox = function (srcs: string[], startIndex: number, altBase: string) {
+    currentImages = srcs.map((src, idx) => ({ src, alt: `${altBase} — screenshot ${idx + 1}` }));
+    updateArrowVisibility();
+    show(startIndex);
+    overlay.hidden = false;
+  };
+
+  function close() {
+    overlay.hidden = true;
+  }
+
+  document.getElementById('lightbox-close')?.addEventListener('click', close);
+  prevBtn.addEventListener('click', () => show(currentIndex - 1));
+  nextBtn.addEventListener('click', () => show(currentIndex + 1));
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (overlay.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(currentIndex - 1);
+    if (e.key === 'ArrowRight') show(currentIndex + 1);
+  });
+</script>
