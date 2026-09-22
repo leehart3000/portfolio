@@ -1,0 +1,16 @@
+export const techCategoryColors: Record<string, string> = {
+  'Programming Language': '#FCEFC7',
+  'Framework': '#D0E8F5',
+  'Library': '#E4D9F2',
+  'Database': '#D9E9D9',
+  'Cloud & Infrastructure': '#FCE0D0',
+  'Tooling': '#E8D4B0',
+  'Design Tool': '#F5D9E0',
+  'AI / ML': '#DCE8F7',
+  'Concept / Practice': '#EDEDED',
+  'Data Format': '#D6E8E4',
+  'Protocol / Standard': '#E0D9F7',
+  'IDE / Editor': '#D8E4D0',
+  'Testing': '#F2E0D6',
+  'CMS / Platform': '#E8E0F5',
+};

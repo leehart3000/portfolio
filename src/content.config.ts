@@ -14,9 +14,7 @@ const projects = defineCollection({
     repoIsPrivate: z.boolean().default(false),
     logo: z.string().optional(),
     screenshots: z.array(z.string()).optional(),
-    startDate: z.coerce.date().optional(),
     order: z.number().default(0),
-    featured: z.boolean().default(false),
   }),
 });
 
@@ -26,6 +24,8 @@ const tech = defineCollection({
     name: z.string(),
     description: z.string(),
     url: z.string().url().optional(),
+    category: z.string().optional(),
+    featured: z.boolean().default(false),
   }),
 });
 
@@ -33,6 +33,7 @@ const employments = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/employments' }),
   schema: z.object({
     name: z.string(),
+    locations: z.array(z.string()).optional(),
     url: z.string().url().optional(),
     logo: z.string().optional(),
     summary: z.string(),
@@ -44,7 +45,7 @@ const employments = defineCollection({
     })),
     status: z.object({
       label: z.string(),
-      emoji: z.string(),
+      emoji: z.string().optional(),
     }).optional(),
     order: z.number().default(0),
   }),
@@ -61,7 +62,7 @@ const certificates = defineCollection({
     logo: z.string().optional(),
     summary: z.string(),
     tech: z.array(z.string()).default([]),
-    completionDate: z.string(),
+    completionDate: z.coerce.date(),
     duration: z.string().optional(),
     relatedCertificates: z.array(z.object({
       name: z.string(),

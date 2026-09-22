@@ -2,6 +2,9 @@
 import { getCollection, getEntry } from 'astro:content';
 import { slugify } from '../../lib/slugify';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { techColors, defaultTechColor } from '../../data/tech-colors';
+import { techCategoryColors } from '../../data/tech-category-colors';
+import { techCategoryEmojis, defaultTechCategoryEmoji } from '../../data/tech-category-emojis';
 
 const allProjects = await getCollection('projects');
 const allEmployments = await getCollection('employments');
@@ -14,31 +17,64 @@ allCertificates.forEach((c) => c.data.tech.forEach((t) => techNames.add(t)));
 
 const sortedTechNames = Array.from(techNames).sort((a, b) => a.localeCompare(b));
 
-const techList = await Promise.all(
+const techListWithMeta = await Promise.all(
   sortedTechNames.map(async (name) => {
     const entry = await getEntry('tech', slugify(name));
     return {
       name,
       slug: slugify(name),
       description: entry?.data.description ?? null,
+      featured: entry?.data.featured ?? false,
+      emoji: entry?.data.category ? (techCategoryEmojis[entry.data.category] ?? defaultTechCategoryEmoji) : defaultTechCategoryEmoji,
+      borderColor: techColors[name] ?? (entry?.data.category ? techCategoryColors[entry.data.category] : null) ?? defaultTechColor,
       hasProjects: allProjects.some((p) => p.data.tech.includes(name)),
       hasEmployments: allEmployments.some((e) => e.data.tech.includes(name)),
       hasCertificates: allCertificates.some((c) => c.data.tech.includes(name)),
     };
   })
 );
+
+const favouriteTech = techListWithMeta
+  .filter((t) => t.featured)
+  .sort((a, b) => a.name.localeCompare(b.name));
+const otherTech = techListWithMeta
+  .filter((t) => !t.featured)
+  .sort((a, b) => a.name.localeCompare(b.name));
 ---
 
-<BaseLayout title="Lee Hart - Known Tech">
-  <h1>Known Tech</h1>
-  <p>
-    The languages, frameworks, and platforms I've been using across my
-    recent projects — click through to see which projects use each one.
-  </p>
-  {techList.map((t) => (
+<BaseLayout title="Lee Hart - Tech">
+  {favouriteTech.length > 0 && (
+    <>
+      <h2>Featured Technologies</h2>
+      {favouriteTech.map((t) => (
+        <article class="tech-entry" style={`border: 2px solid ${t.borderColor}`}>
+          <div class="tech-entry-header">
+            <h3 class="tech-entry-name">
+              <a href={`/tech/${t.slug}`}><span class="tech-emoji">{t.emoji}&nbsp;</span>{t.name}</a>
+            </h3>
+            <a href={`/tech/${t.slug}`} class="more-info-link">
+              <span class="info-icon">i</span>
+              <span class="more-info-text">More about this tech</span>
+            </a>
+            <span class="tech-entry-links">
+              {t.hasProjects && <a href={`/tech/${t.slug}#projects`} class="cross-link" style="--badge-color: #D0E8F5">📁&nbsp;Projects</a>}
+              {t.hasEmployments && <a href={`/tech/${t.slug}#employments`} class="cross-link" style="--badge-color: #E4D9F2">💼&nbsp;Employments</a>}
+              {t.hasCertificates && <a href={`/tech/${t.slug}#certificates`} class="cross-link" style="--badge-color: #FCEFC7">📚&nbsp;Certificates</a>}
+            </span>
+          </div>
+          {t.description && <p>{t.description}</p>}
+        </article>
+      ))}
+    </>
+  )}
+
+  <h2>Other Known Tech</h2>
+  {otherTech.map((t) => (
     <article class="tech-entry">
       <div class="tech-entry-header">
-        <h3 class="tech-entry-name"><a href={`/tech/${t.slug}`}>{t.name}</a></h3>
+        <h3 class="tech-entry-name">
+          <a href={`/tech/${t.slug}`}><span class="tech-emoji">{t.emoji}&nbsp;</span>{t.name}</a>
+        </h3>
         <a href={`/tech/${t.slug}`} class="more-info-link">
           <span class="info-icon">i</span>
           <span class="more-info-text">More about this tech</span>
@@ -70,7 +106,7 @@ const techList = await Promise.all(
   .tech-entry-name {
     grid-column: 1;
     justify-self: start;
-    margin-bottom: 0.2em;
+    margin: 0;
   }
   .more-info-link {
     grid-column: 2;
@@ -107,6 +143,13 @@ const techList = await Promise.all(
     display: flex;
     gap: 0.5em;
     flex-wrap: wrap;
+  }
+  .tech-emoji {
+    text-decoration: none;
+    display: inline-block;
+  }
+  .tech-entry-name a:hover .tech-emoji {
+    text-decoration: none;
   }
   .cross-link {
     position: relative;
