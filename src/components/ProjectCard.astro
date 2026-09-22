@@ -3,6 +3,8 @@ import { techColors, defaultTechColor } from '../data/tech-colors';
 import { slugify } from '../lib/slugify';
 import Carousel from './Carousel.astro';
 import { statusMeta } from '../data/status-meta';
+import { getTechCategoryMap } from '../lib/tech-categories';
+import { techCategoryColors } from '../data/tech-category-colors';
 
 interface Props {
   project: any;
@@ -11,6 +13,15 @@ interface Props {
 
 const { project, linkTitle = false } = Astro.props;
 const detailHref = `/projects/${project.id}`;
+const hasBody = (project.body ?? '').trim().length > 0;
+const hasScreenshots = !!(project.data.screenshots && project.data.screenshots.length > 0);
+
+const techCategoryMap = await getTechCategoryMap();
+function resolveTechColor(t: string): string {
+  if (techColors[t]) return techColors[t];
+  const category = techCategoryMap[t];
+  return category ? (techCategoryColors[category] ?? defaultTechColor) : defaultTechColor;
+}
 ---
 
 <article>
@@ -27,7 +38,7 @@ const detailHref = `/projects/${project.id}`;
         )}
       </h3>
     </div>
-    {linkTitle && (
+    {linkTitle && (hasBody || hasScreenshots) && (
       <a href={detailHref} class="more-info-link">
         <span class="info-icon">i</span>
         <span class="more-info-text">More about this project</span>
@@ -76,14 +87,16 @@ const detailHref = `/projects/${project.id}`;
     )}
   </p>
 
-  <fieldset class="tech-fieldset">
-    <legend>Applied tech:</legend>
-    {[...project.data.tech].sort((a, b) => a.localeCompare(b)).map((t: string) => (
-      <a href={`/tech/${slugify(t)}`} class="tech-badge" style={`--badge-color: ${techColors[t] ?? defaultTechColor}`}>
-        {t}
-      </a>
-    ))}
-  </fieldset>
+  {project.data.tech.length > 0 && (
+    <fieldset class="tech-fieldset">
+      <legend>Applied tech:</legend>
+      {[...project.data.tech].sort((a, b) => a.localeCompare(b)).map((t: string) => (
+        <a href={`/tech/${slugify(t)}`} class="tech-badge" style={`--badge-color: ${resolveTechColor(t)}`}>
+          {t}
+        </a>
+      ))}
+    </fieldset>
+  )}
 
 </article>
 

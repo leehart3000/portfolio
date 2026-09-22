@@ -1,6 +1,8 @@
 ---
 import { techColors, defaultTechColor } from '../data/tech-colors';
 import { slugify } from '../lib/slugify';
+import { getTechCategoryMap } from '../lib/tech-categories';
+import { techCategoryColors } from '../data/tech-category-colors';
 
 interface Props {
   employment: any;
@@ -9,6 +11,14 @@ interface Props {
 
 const { employment, linkTitle = false } = Astro.props;
 const detailHref = `/employments/${employment.id}`;
+const hasBody = (employment.body ?? '').trim().length > 0;
+
+const techCategoryMap = await getTechCategoryMap();
+function resolveTechColor(t: string): string {
+  if (techColors[t]) return techColors[t];
+  const category = techCategoryMap[t];
+  return category ? (techCategoryColors[category] ?? defaultTechColor) : defaultTechColor;
+}
 ---
 
 <article>
@@ -21,22 +31,32 @@ const detailHref = `/employments/${employment.id}`;
         {linkTitle ? (
           <a href={detailHref}>{employment.data.name}</a>
         ) : (
-          `My employment at ${employment.data.name}`
+          employment.data.name
         )}
       </h3>
     </div>
-    {linkTitle && (
-      <a href={detailHref} class="more-info-link">
-        <span class="info-icon">i</span>
-        <span class="more-info-text">More about this employment</span>
-      </a>
-    )}
-    {employment.data.status && (
-      <span class="employment-status-badge">
-        Status: {employment.data.status.label} {employment.data.status.emoji}
-      </span>
-    )}
+    <div class="employer-side-stack">
+      {employment.data.status && (
+        <span class="employment-status-badge">
+          Status: {employment.data.status.label}{employment.data.status.emoji && ` ${employment.data.status.emoji}`}
+        </span>
+      )}
+      {linkTitle && hasBody && (
+        <a href={detailHref} class="more-info-link">
+          <span class="info-icon">i</span>
+          <span class="more-info-text">More about this employment</span>
+        </a>
+      )}
+    </div>
   </div>
+
+  {employment.data.locations && employment.data.locations.length > 0 && (
+    <ul class="locations-list">
+      {employment.data.locations.map((loc: string) => (
+        <li><span class="loc-icon">📍</span><span class="loc-text">{loc}</span></li>
+      ))}
+    </ul>
+  )}
 
   <p>{employment.data.summary}</p>
 
@@ -58,7 +78,7 @@ const detailHref = `/employments/${employment.id}`;
   <fieldset class="tech-fieldset">
     <legend>Applied tech:</legend>
     {[...employment.data.tech].sort((a, b) => a.localeCompare(b)).map((t: string) => (
-      <a href={`/tech/${slugify(t)}`} class="tech-badge" style={`--badge-color: ${techColors[t] ?? defaultTechColor}`}>
+      <a href={`/tech/${slugify(t)}`} class="tech-badge" style={`--badge-color: ${resolveTechColor(t)}`}>
         {t}
       </a>
     ))}
@@ -73,21 +93,30 @@ const detailHref = `/employments/${employment.id}`;
     margin-bottom: 1.2em;
   }
   .employer-header {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.4em 1em;
     margin-bottom: 0.2em;
   }
-  .employer-header + p {
-    margin-top: 0;
-  }
   .employer-title-line {
-    grid-column: 1;
-    justify-self: start;
+    flex: 1 1 200px;
     display: flex;
     align-items: center;
     gap: 0.5em;
+  }
+  .employer-title-line h3 {
+    margin: 0;
+  }
+  .employer-side-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3em;
+  }
+  .employer-header + p {
+    margin-top: 0;
   }
   .employer-logo {
     width: 1.4em;
@@ -216,5 +245,22 @@ const detailHref = `/employments/${employment.id}`;
   }
   :root[data-theme="dark"] .tech-badge:hover {
     filter: brightness(1.15);
+  }
+  .locations-list {
+    list-style: none;
+    margin: 0 0 0.3em;
+    padding: 0;
+    font-size: 0.9em;
+    color: var(--color-text);
+  }
+  .locations-list li {
+    display: flex;
+    gap: 0.4em;
+  }
+  .loc-icon {
+    flex-shrink: 0;
+  }
+  .loc-text {
+    flex: 1;
   }
 </style>
