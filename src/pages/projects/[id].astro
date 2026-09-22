@@ -14,13 +14,18 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+const hasBody = (project.body ?? '').trim().length > 0;
 ---
 
 <BaseLayout title={`Lee Hart - ${project.data.title}`}>
   <Breadcrumb parentLabel="Projects" parentHref="/projects" current={project.data.title} />
   <ProjectCard project={project} />
-  <h2 class="detail-heading">More about this project</h2>
-  <Content />
+  {hasBody && (
+    <>
+      <h2 class="detail-heading">More about this project</h2>
+      <Content />
+    </>
+  )}
 </BaseLayout>
 
 <style>

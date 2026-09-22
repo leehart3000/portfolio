@@ -4,7 +4,7 @@ import CertificateCard from '../components/CertificateCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const allCertificates = (await getCollection('certificates')).sort(
-  (a, b) => a.data.order - b.data.order
+  (a, b) => b.data.completionDate.getTime() - a.data.completionDate.getTime()
 );
 ---
 
