@@ -1,0 +1,41 @@
+---
+name: "IBM RAG and Agentic AI"
+type: "Professional Certificate"
+provider: "Coursera"
+providerUrl: "https://www.coursera.org/"
+url: ""
+summary: ""
+tech: []
+completionDate: ""
+duration: "100 hours"
+relatedCertificates:
+  - name: "Develop Generative AI Applications: Get Started"
+    slug: "ibm-develop-genai-apps-get-started"
+
+  - name: "Build RAG Applications: Get Started"
+    slug: "ibm-build-rag-apps-get-started"
+
+  - name: "Vector Databases for RAG: An Introduction"
+    slug: "ibm-vector-databases-for-rag-an-intro"
+
+  - name: "Advanced RAG with Vector Databases and Rertrievers"
+    slug: "ibm-advanced-rag-with-vector-databases-retrievers"
+
+  - name: "Build Multimodal Generative AI Applications"
+    slug: "ibm-build-multimodal-genai-apps"
+
+  - name: "Fundamentals of Building AI Agents"
+    slug: "ibm-fundamentals-of-building-ai-agents"
+
+  - name: "Agentic AI with LangChain and LangGraph"
+    slug: "ibm-agentic-ai-with-langchain-langgraph"
+
+  - name: "Agentic AI with LangChain, CrewAI, AutoGen and BeeAI"
+    slug: "ibm-agentic-ai-with-langchain-crewai-autogen-beeai"
+
+  - name: "Build AI Agents using MCP"
+    slug: "ibm-build-ai-agents-using-mcp"
+
+  - name: "RAG and Agentic AI Capstone Project"
+    slug: "ibm-rag-agentic-ai-capstone-project"
+---

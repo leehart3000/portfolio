@@ -1,0 +1,11 @@
+---
+name: "XXX"
+type: "XXX"
+provider: "Coursera"
+providerUrl: "https://www.coursera.org/"
+url: "https://example.com"
+summary: ""
+tech: []
+completionDate: "00 Xxx 202X"
+duration: ""
+---
