@@ -11,11 +11,11 @@ duration: ""
 order: 4
 relatedCertificates:
   - name: "Generative AI: Introduction and Applications"
-    slug: "ibm-genai-introduction-and-applications"
+    slug: "ibm-genai-intro-and-apps"
 
   - name: "Generative AI: Prompt Engineering Basics"
     slug: "ibm-genai-prompt-engineering-basics"
 
   - name: "Generative AI: Elevate your Software Development Career"
-    slug: "ibm-genai-elevate-your-software-development-career"
+    slug: "ibm-genai-elevate-your-software-dev-career"
 ---
