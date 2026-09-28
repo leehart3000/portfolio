@@ -7,9 +7,15 @@ import { techCategoryColors } from '../data/tech-category-colors';
 
 interface Props {
   certificate: any;
+  // The page id for this card. Defaults to the certificate's own id.
+  anchorId?: string;
+  // Added in front of the links to included certificates, e.g. "ibm-ai-developer--".
+  relatedAnchorPrefix?: string;
+  // True when shown inside another certificate's "Includes" section.
+  nested?: boolean;
 }
 
-const { certificate } = Astro.props;
+const { certificate, anchorId, relatedAnchorPrefix = '', nested = false } = Astro.props;
 
 const dateStr = certificate.data.completionDate.toLocaleDateString('en-GB', {
   day: 'numeric', month: 'long', year: 'numeric'
@@ -32,7 +38,7 @@ function resolveTechColor(t: string): string {
 }
 ---
 
-<article id={certificate.id}>
+<article id={anchorId ?? certificate.id} data-cert={certificate.id} class:list={['certificate', { nested }]}>
   <div class="certificate-header">
     <div class="certificate-name">
       {certificate.data.logo && (
@@ -70,7 +76,7 @@ function resolveTechColor(t: string): string {
     <p class="related-line">
       Included certificates:{' '}
       {relatedWithExistence.map((rel, i) => (
-        <>{rel.exists ? <a href={`#${rel.slug}`}>{rel.name}</a> : <span>{rel.name}</span>}{i < relatedWithExistence.length - 1 && ', '}</>
+        <>{rel.exists ? <a href={`#${relatedAnchorPrefix}${rel.slug}`}>{rel.name}</a> : <span>{rel.name}</span>}{i < relatedWithExistence.length - 1 && ', '}</>
       ))}
     </p>
   )}
@@ -91,6 +97,8 @@ function resolveTechColor(t: string): string {
       ))}
     </fieldset>
   )}
+
+  <slot />
 </article>
 
 <style>
@@ -99,6 +107,12 @@ function resolveTechColor(t: string): string {
     border-radius: 8px;
     padding: 1em 1.2em;
     margin-bottom: 1.2em;
+    scroll-margin-top: 1em;
+  }
+  article.nested {
+    background: var(--color-bg);
+    margin-bottom: 0.8em;
+    font-size: 0.95em;
   }
   .certificate-name {
     grid-column: 1;
