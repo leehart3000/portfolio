@@ -96,6 +96,8 @@ const year = new Date().getFullYear();
       --color-border: #ddd;
       --color-heading: #4d4d4d;
       --color-image-border: #333333;
+      --color-code-bg: #eceef1;
+      --color-code-text: #7A1F2B;
     }
     :root[data-theme="dark"] {
       --color-bg: #14181d;
@@ -108,6 +110,8 @@ const year = new Date().getFullYear();
       --color-border: #333;
       --color-heading: #cfcfcf;
       --color-image-border: #cccccc;
+      --color-code-bg: #262c35;
+      --color-code-text: #e0a3a3;
     }
     * {
       box-sizing: border-box;
@@ -151,6 +155,14 @@ const year = new Date().getFullYear();
     }
     h1 {
       margin-bottom: 0.4em;
+    }
+    :not(pre) > code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+      background: var(--color-code-bg);
+      color: var(--color-code-text);
     }
   </style>
   <style>

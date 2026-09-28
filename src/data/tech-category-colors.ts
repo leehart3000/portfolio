@@ -7,7 +7,7 @@ export const techCategoryColors: Record<string, string> = {
   'Tooling': '#E8D4B0',
   'Design Tool': '#F5D9E0',
   'AI / ML': '#DCE8F7',
-  'Concept / Practice': '#EDEDED',
+  'Concept / Practice': '#E3F0C6',
   'Data Format': '#D6E8E4',
   'Protocol / Standard': '#E0D9F7',
   'IDE / Editor': '#D8E4D0',

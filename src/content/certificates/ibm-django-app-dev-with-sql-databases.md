@@ -10,7 +10,7 @@ I composed SQL queries to insert, select, update and delete data in a database.
 I used Django ORM to build object-oriented databases. 
 I integrated Bootstrap into a Django template and built interactive web pages. 
 "
-tech: ["Django", "SQL", "ORM", "Bootstrap"]
+tech: ["Django", "SQL", "Django ORM", "Bootstrap"]
 completionDate: "20 Apr 2026"
 duration: "15 hours"
 ---

@@ -2,18 +2,20 @@
 title: "Elementorium"
 status: "growing"
 order: 2
-summary: "Elementorium uses a JAMstack headless e-commerce platform, built for speed, flexibility, and clean separation between storefront and backend."
-tech: ["Astro", "Tailwind CSS", "Stripe", "Cloudflare", "Bun", "GitHub Actions"]
+summary: "Elementorium is a headless e-commerce shop for pure elements, raw minerals and natural gemstones, built with Astro and Tailwind CSS on Cloudflare Workers, with payments handled by Stripe."
+tech: ["Astro", "Tailwind CSS", "Cloudflare", "Cloudflare Workers", "Cloudflare Workers KV", "Bun", "Stripe", "Git", "GitHub", "GitHub Actions", "CI/CD", "JavaScript", "ES6", "HTML", "CSS", "JavaScript Object Notation (JSON)", "YAML", "serverless", "Application Programming Interface (API)", "e-commerce", "Responsive Web Design (RWD)", "Asynchronous JavaScript and XML (Ajax)", "Node.js", "DevOps", "ESLint", "Prettier", "Husky", "Google Analytics", "Sentry", "Vite"]
 liveUrl: "https://elementorium.co.uk"
 repoUrl: "https://github.com/leehart3000/elementorium"
 repoIsPrivate: true
-logo: "/logos/elementorium-light.svg"
+logo: "/logos/elementorium.svg"
 screenshots:
   - "/screenshots/elementorium-shop-elements-cubes.jpg"
   - "/screenshots/elementorium-shop-minerals-tumbled.jpg"
   - "/screenshots/elementorium-basket.jpg"
 ---
 
-Elementorium is a headless e-commerce platform following the JAMstack approach — a decoupled storefront backed by an API-driven content and commerce layer. It's in active early development, focused on getting the core storefront and product data flow working cleanly.
+Elementorium is a small but growing online shop for collectors of pure elements, raw minerals and natural gemstones, whether they are building a periodic table collection or adding specimens to a display cabinet.
 
-This project showcases modern headless architecture: fast, static-first delivery on the frontend with flexible, API-driven content and commerce behind it.
+The storefront is built with Astro and styled with Tailwind CSS, rendering fast, mostly static pages at the edge. Dynamic parts, such as the basket and checkout, run as serverless functions on Cloudflare Workers, with order data stored in Cloudflare Workers KV. Payments are handled by Stripe, so card details never touch the shop's own servers.
+
+Development uses Bun for package management and scripts, with ESLint and Prettier keeping the code consistent, and Husky running checks before each commit. GitHub Actions runs the CI pipeline, Sentry monitors errors in production, and Google Analytics measures traffic, loaded only after visitors give consent.
