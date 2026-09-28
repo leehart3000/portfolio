@@ -3,7 +3,7 @@ title: "HartSoft.Dev"
 status: "mature"
 order: 3
 summary: "HartSoft.Dev (this site) is an Astro site on Cloudflare Workers, built openly as a working example of the stack in action."
-tech: ["Astro", "Cloudflare", "Cloudflare Workers", "Cloudflare Workers KV", "HTML", "CSS", "JavaScript", "TypeScript", "Node.js", "Git", "GitHub", "YAML", "Markdown", "Application Programming Interface (API)", "REST", "serverless", "CI/CD", "Responsive Web Design (RWD)", "Asynchronous JavaScript and XML (Ajax)", "ES6", "Vite", "Cloudflare Wrangler", "Resend", "Google Analytics", "fnm", "Dependabot"]
+tech: ["Astro", "Cloudflare", "Cloudflare Workers", "Cloudflare Workers KV", "HTML", "CSS", "JavaScript", "TypeScript", "Node.js", "Git", "GitHub", "YAML", "Markdown", "Application Programming Interface (API)", "REST", "serverless", "CI/CD", "Responsive Web Design (RWD)", "Asynchronous JavaScript and XML (Ajax)", "ES6", "Vite", "Cloudflare Wrangler", "Resend", "Google Analytics", "fnm", "Dependabot", "Microsoft Visual Studio Code (VS Code)"]
 liveUrl: "https://hartsoft.dev"
 repoUrl: "https://github.com/leehart3000/portfolio"
 repoIsPrivate: false
