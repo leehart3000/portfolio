@@ -6,6 +6,26 @@ import { techColors, defaultTechColor } from '../../data/tech-colors';
 import { techCategoryColors } from '../../data/tech-category-colors';
 import { techCategoryEmojis, defaultTechCategoryEmoji } from '../../data/tech-category-emojis';
 
+// The order categories appear in. Any category not listed here is added
+// alphabetically after these, and uncategorised tech goes last, in "Other".
+const categoryOrder = [
+  'Programming Language',
+  'Framework',
+  'Library',
+  'Database',
+  'Data Format',
+  'Cloud & Infrastructure',
+  'AI / ML',
+  'Testing',
+  'Tooling',
+  'IDE / Editor',
+  'CMS / Platform',
+  'Protocol / Standard',
+  'Concept / Practice',
+  'Design Tool',
+];
+const OTHER = 'Other';
+
 const allProjects = await getCollection('projects');
 const allEmployments = await getCollection('employments');
 const allCertificates = await getCollection('certificates');
@@ -15,18 +35,23 @@ allProjects.forEach((p) => p.data.tech.forEach((t) => techNames.add(t)));
 allEmployments.forEach((e) => e.data.tech.forEach((t) => techNames.add(t)));
 allCertificates.forEach((c) => c.data.tech.forEach((t) => techNames.add(t)));
 
-const sortedTechNames = Array.from(techNames).sort((a, b) => a.localeCompare(b));
-
-const techListWithMeta = await Promise.all(
-  sortedTechNames.map(async (name) => {
+const techList = await Promise.all(
+  Array.from(techNames).map(async (name) => {
     const entry = await getEntry('tech', slugify(name));
+    const category = entry?.data.category ?? null;
     return {
       name,
       slug: slugify(name),
       description: entry?.data.description ?? null,
+      category,
       featured: entry?.data.featured ?? false,
-      emoji: entry?.data.category ? (techCategoryEmojis[entry.data.category] ?? defaultTechCategoryEmoji) : defaultTechCategoryEmoji,
-      borderColor: techColors[name] ?? (entry?.data.category ? techCategoryColors[entry.data.category] : null) ?? defaultTechColor,
+      borderColor:
+        techColors[name] ??
+        (category ? techCategoryColors[category] : undefined) ??
+        defaultTechColor,
+      emoji: category
+        ? (techCategoryEmojis[category] ?? defaultTechCategoryEmoji)
+        : defaultTechCategoryEmoji,
       hasProjects: allProjects.some((p) => p.data.tech.includes(name)),
       hasEmployments: allEmployments.some((e) => e.data.tech.includes(name)),
       hasCertificates: allCertificates.some((c) => c.data.tech.includes(name)),
@@ -34,19 +59,51 @@ const techListWithMeta = await Promise.all(
   })
 );
 
-const favouriteTech = techListWithMeta
-  .filter((t) => t.featured)
-  .sort((a, b) => a.name.localeCompare(b.name));
-const otherTech = techListWithMeta
-  .filter((t) => !t.featured)
-  .sort((a, b) => a.name.localeCompare(b.name));
+type TechItem = (typeof techList)[number];
+const byName = (a: TechItem, b: TechItem) => a.name.localeCompare(b.name);
+
+const featuredTech = techList.filter((t) => t.featured).sort(byName);
+
+const groups = new Map<string, TechItem[]>();
+for (const t of techList) {
+  const key = t.category ?? OTHER;
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(t);
+}
+
+const extraCategories = [...groups.keys()]
+  .filter((k) => !categoryOrder.includes(k) && k !== OTHER)
+  .sort((a, b) => a.localeCompare(b));
+
+const categories = [...categoryOrder, ...extraCategories, OTHER]
+  .filter((k) => groups.has(k))
+  .map((k) => ({
+    name: k,
+    id: `category-${slugify(k)}`,
+    emoji: k === OTHER ? defaultTechCategoryEmoji : (techCategoryEmojis[k] ?? defaultTechCategoryEmoji),
+    color: techCategoryColors[k] ?? defaultTechColor,
+    items: groups.get(k)!.sort(byName),
+  }));
 ---
 
 <BaseLayout title="Lee Hart - Tech">
-  {favouriteTech.length > 0 && (
-    <>
+  <nav class="category-chips" aria-label="Jump to a tech category">
+    {featuredTech.length > 0 && (
+      <a href="#featured" class="category-chip" style="--chip-color: #FCEFC7">
+        ⭐&nbsp;Featured<span class="chip-count">{featuredTech.length}</span>
+      </a>
+    )}
+    {categories.map((c) => (
+      <a href={`#${c.id}`} class="category-chip" style={`--chip-color: ${c.color}`}>
+        {c.emoji}&nbsp;{c.name}<span class="chip-count">{c.items.length}</span>
+      </a>
+    ))}
+  </nav>
+
+  {featuredTech.length > 0 && (
+    <section id="featured" class="anchor-target">
       <h2>Featured Technologies</h2>
-      {favouriteTech.map((t) => (
+      {featuredTech.map((t) => (
         <article class="tech-entry" style={`border: 2px solid ${t.borderColor}`}>
           <div class="tech-entry-header">
             <h3 class="tech-entry-name">
@@ -65,32 +122,104 @@ const otherTech = techListWithMeta
           {t.description && <p>{t.description}</p>}
         </article>
       ))}
-    </>
+    </section>
   )}
 
-  <h2>Other Known Tech</h2>
-  {otherTech.map((t) => (
-    <article class="tech-entry">
-      <div class="tech-entry-header">
-        <h3 class="tech-entry-name">
-          <a href={`/tech/${t.slug}`}><span class="tech-emoji">{t.emoji}&nbsp;</span>{t.name}</a>
-        </h3>
-        <a href={`/tech/${t.slug}`} class="more-info-link">
-          <span class="info-icon">i</span>
-          <span class="more-info-text">More about this tech</span>
-        </a>
-        <span class="tech-entry-links">
-          {t.hasProjects && <a href={`/tech/${t.slug}#projects`} class="cross-link" style="--badge-color: #D0E8F5">📁&nbsp;Projects</a>}
-          {t.hasEmployments && <a href={`/tech/${t.slug}#employments`} class="cross-link" style="--badge-color: #E4D9F2">💼&nbsp;Employments</a>}
-          {t.hasCertificates && <a href={`/tech/${t.slug}#certificates`} class="cross-link" style="--badge-color: #FCEFC7">📚&nbsp;Certificates</a>}
-        </span>
-      </div>
-      {t.description && <p>{t.description}</p>}
-    </article>
+  <h2>All Technologies by Category</h2>
+
+  {categories.map((c) => (
+    <details class="category-section anchor-target" id={c.id} style={`--section-color: ${c.color}`}>
+      <summary>
+        {c.emoji}&nbsp;{c.name}
+        <span class="summary-count">{c.items.length}</span>
+      </summary>
+      <ul class="tech-grid">
+        {c.items.map((t) => (
+          <li class="tech-item" style={`--item-color: ${t.borderColor}`}>
+            <a href={`/tech/${t.slug}`} class="tech-item-name">{t.name}</a>
+            <span class="tech-item-links">
+              {t.hasProjects && (
+                <a href={`/tech/${t.slug}#projects`} title="Projects" aria-label={`Projects using ${t.name}`}>📁</a>
+              )}
+              {t.hasEmployments && (
+                <a href={`/tech/${t.slug}#employments`} title="Employments" aria-label={`Employments applying ${t.name}`}>💼</a>
+              )}
+              {t.hasCertificates && (
+                <a href={`/tech/${t.slug}#certificates`} title="Certificates" aria-label={`Certificates covering ${t.name}`}>📚</a>
+              )}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </details>
   ))}
 </BaseLayout>
 
+<script>
+  // Open a collapsed category when it's linked to, e.g. /tech#category-framework
+  function openFromHash() {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el instanceof HTMLDetailsElement) {
+      el.open = true;
+      el.scrollIntoView();
+    }
+  }
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+</script>
+
 <style>
+  .anchor-target {
+    scroll-margin-top: 1em;
+  }
+
+  /* Jump chips */
+  .category-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    margin: 0.5em 0 1.5em;
+  }
+  .category-chip {
+    position: relative;
+    isolation: isolate;
+    display: inline-block;
+    font-size: 0.8em;
+    padding: 0.2em 0.7em;
+    border-radius: 999px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .category-chip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--chip-color);
+    z-index: -1;
+  }
+  .category-chip:hover {
+    text-decoration: none;
+    filter: brightness(0.95);
+  }
+  :root[data-theme="dark"] .category-chip::before {
+    filter: brightness(0.6) saturate(0.85);
+  }
+  :root[data-theme="dark"] .category-chip {
+    color: var(--color-bg);
+  }
+  :root[data-theme="dark"] .category-chip:hover {
+    filter: brightness(1.15);
+  }
+  .chip-count {
+    margin-left: 0.4em;
+    opacity: 0.7;
+  }
+
+  /* Featured cards */
   .tech-entry {
     background: var(--color-bg-header);
     border-radius: 8px;
@@ -107,6 +236,13 @@ const otherTech = techListWithMeta
     grid-column: 1;
     justify-self: start;
     margin: 0;
+  }
+  .tech-emoji {
+    text-decoration: none;
+    display: inline-block;
+  }
+  .tech-entry-name a:hover .tech-emoji {
+    text-decoration: none;
   }
   .more-info-link {
     grid-column: 2;
@@ -144,13 +280,6 @@ const otherTech = techListWithMeta
     gap: 0.5em;
     flex-wrap: wrap;
   }
-  .tech-emoji {
-    text-decoration: none;
-    display: inline-block;
-  }
-  .tech-entry-name a:hover .tech-emoji {
-    text-decoration: none;
-  }
   .cross-link {
     position: relative;
     isolation: isolate;
@@ -182,5 +311,75 @@ const otherTech = techListWithMeta
   }
   :root[data-theme="dark"] .cross-link:hover {
     filter: brightness(1.15);
+  }
+
+  /* Category sections */
+  .category-section {
+    background: var(--color-bg-header);
+    border-left: 4px solid var(--section-color);
+    border-radius: 8px;
+    padding: 0 1em;
+    margin-bottom: 0.8em;
+  }
+  .category-section summary {
+    cursor: pointer;
+    padding: 0.7em 0;
+    font-weight: 600;
+    color: var(--color-heading);
+  }
+  .summary-count {
+    float: right;
+    font-weight: normal;
+    font-size: 0.9em;
+    color: var(--color-text);
+  }
+  .tech-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.5em;
+  }
+  .tech-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.4em 0.6em;
+    border-radius: 6px;
+    background: var(--color-bg);
+    border-left: 3px solid var(--item-color);
+  }
+  .tech-item-name {
+    text-decoration: none;
+  }
+  .tech-item-name:hover {
+    text-decoration: underline;
+  }
+  .tech-item-links {
+    display: flex;
+    gap: 0.3em;
+    flex-shrink: 0;
+  }
+  .tech-item-links a {
+    text-decoration: none;
+    font-size: 0.9em;
+  }
+  .tech-item-links a:hover {
+    filter: brightness(0.8);
+  }
+
+  @media (max-width: 600px) {
+    .tech-entry-header {
+      grid-template-columns: 1fr;
+      gap: 0.4em;
+    }
+    .tech-entry-name,
+    .more-info-link,
+    .tech-entry-links {
+      grid-column: 1;
+      justify-self: start;
+    }
   }
 </style>
