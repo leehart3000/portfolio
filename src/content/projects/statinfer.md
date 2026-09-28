@@ -9,8 +9,8 @@ repoUrl: "https://github.com/leehart3000/statinfer"
 repoIsPrivate: false
 logo: "/logos/statinfer.svg"
 screenshots:
-  - "/screenshots/statinfer-function-tTest.jpg"
-  - "/screenshots/statinfer-t-test-demo.jpg"
+  - "../../assets/screenshots/statinfer-function-tTest.jpg"
+  - "../../assets/screenshots/statinfer-t-test-demo.jpg"
 ---
 
 statinfer brings classic statistical hypothesis tests to modern JavaScript and TypeScript. It works in Node.js and in the browser, and every test takes a single options object and returns the same result format: the test statistic, p-value, degrees of freedom, estimate and confidence interval.
