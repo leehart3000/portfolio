@@ -5,7 +5,7 @@ provider: "Coursera"
 providerUrl: "https://www.coursera.org/"
 url: "https://coursera.org/share/b56f3442163f184c5d6292b92819d151"
 summary: ""
-tech: ["CI/CD", "Git", "JavaScript", "ORM", "GitHub", "HTML", "CSS", "React", "Bootstrap", "Express", "Node.js", "Python", "Django", "Docker", "Kubernetes", "microservices", "serverless", "cloud computing", "Flask", "SQL", "Istio", "OpenShift", "containers"]
+tech: ["CI/CD", "Git", "JavaScript", "Django ORM", "GitHub", "HTML", "CSS", "React", "Bootstrap", "Express", "Node.js", "Python", "Django", "Docker", "Kubernetes", "microservices", "serverless", "cloud computing", "Flask", "SQL", "Istio", "OpenShift", "containers"]
 completionDate: "16 May 2026"
 duration: "219 hours"
 order: 1
