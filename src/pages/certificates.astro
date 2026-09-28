@@ -1,11 +1,33 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import CertificateCard from '../components/CertificateCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const allCertificates = (await getCollection('certificates')).sort(
-  (a, b) => b.data.completionDate.getTime() - a.data.completionDate.getTime()
-);
+type Certificate = CollectionEntry<'certificates'>;
+
+const allCertificates = await getCollection('certificates');
+const byId = new Map(allCertificates.map((c) => [c.id, c]));
+const newestFirst = (a: Certificate, b: Certificate) =>
+  b.data.completionDate.getTime() - a.data.completionDate.getTime();
+
+// Any certificate listed as part of another is shown inside that one, not on its own.
+const childIds = new Set<string>();
+for (const c of allCertificates) {
+  for (const rel of c.data.relatedCertificates ?? []) {
+    if (byId.has(rel.slug)) childIds.add(rel.slug);
+  }
+}
+
+// Main and standalone certificates, newest first. Parts keep the order they're listed in.
+const topLevel = allCertificates
+  .filter((c) => !childIds.has(c.id))
+  .sort(newestFirst)
+  .map((c) => ({
+    certificate: c,
+    children: (c.data.relatedCertificates ?? [])
+      .map((rel) => byId.get(rel.slug))
+      .filter((x): x is Certificate => !!x),
+  }));
 ---
 
 <BaseLayout title="Lee Hart - Certificates">
@@ -14,5 +36,66 @@ const allCertificates = (await getCollection('certificates')).sort(
     Formal qualifications and completed courses relevant to my work,
     alongside the technologies covered by each.
   </p>
-  {allCertificates.map((certificate) => <CertificateCard certificate={certificate} />)}
+
+  {topLevel.map(({ certificate, children }) => (
+    <CertificateCard certificate={certificate} relatedAnchorPrefix={`${certificate.id}--`}>
+      {children.length > 0 && (
+        <details class="included" id={`${certificate.id}--included`}>
+          <summary>
+            Includes {children.length} {children.length === 1 ? 'certificate' : 'certificates'}
+          </summary>
+          <div class="included-list">
+            {children.map((child) => (
+              <CertificateCard certificate={child} anchorId={`${certificate.id}--${child.id}`} nested />
+            ))}
+          </div>
+        </details>
+      )}
+    </CertificateCard>
+  ))}
 </BaseLayout>
+
+<script>
+  // Open any collapsed section containing the linked certificate, then scroll to it.
+  // Also handles old-style links such as /certificates#datacamp-intro-to-python.
+  function openTarget(rawId: string) {
+    const id = decodeURIComponent(rawId);
+    if (!id) return;
+    const el =
+      document.getElementById(id) ??
+      document.querySelector(`[data-cert="${CSS.escape(id)}"]`);
+    if (!el) return;
+    let d = el.closest('details');
+    while (d) {
+      d.open = true;
+      d = d.parentElement?.closest('details') ?? null;
+    }
+    el.scrollIntoView();
+  }
+
+  openTarget(location.hash.slice(1));
+  window.addEventListener('hashchange', () => openTarget(location.hash.slice(1)));
+  // Clicking the same link twice doesn't fire 'hashchange', so handle clicks too.
+  document.addEventListener('click', (e) => {
+    const link = (e.target as Element).closest('a[href^="#"]');
+    if (link) setTimeout(() => openTarget(link.getAttribute('href')!.slice(1)), 0);
+  });
+</script>
+
+<style>
+  .included {
+    margin-top: 0.8em;
+    border-top: 1px solid var(--color-border);
+    padding-top: 0.5em;
+  }
+  .included summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--color-heading);
+    padding: 0.3em 0;
+  }
+  .included-list {
+    margin-top: 0.6em;
+  }
+</style>
