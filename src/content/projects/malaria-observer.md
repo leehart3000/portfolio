@@ -9,9 +9,9 @@ repoUrl: "https://github.com/leehart3000/malaria-observer"
 repoIsPrivate: false
 logo: "/logos/malaria-observer.svg"
 screenshots:
-  - "/screenshots/malaria-observer-datasets-pf8.jpg"
-  - "/screenshots/malaria-observer-explorer-table.jpg"
-  - "/screenshots/malaria-observer-explorer-geo.jpg"
+  - "../../assets/screenshots/malaria-observer-datasets-pf8.jpg"
+  - "../../assets/screenshots/malaria-observer-explorer-table.jpg"
+  - "../../assets/screenshots/malaria-observer-explorer-geo.jpg"
 ---
 
 Malaria Observer brings malaria-related data together in one place and makes it easier to explore. Its data explorer offers both an interactive map, built with Leaflet and OpenStreetMap, and a sortable table view, while editorial pages are managed through the Wagtail CMS.

@@ -9,9 +9,9 @@ repoUrl: "https://github.com/leehart3000/elementorium"
 repoIsPrivate: true
 logo: "/logos/elementorium.svg"
 screenshots:
-  - "/screenshots/elementorium-shop-elements-cubes.jpg"
-  - "/screenshots/elementorium-shop-minerals-tumbled.jpg"
-  - "/screenshots/elementorium-basket.jpg"
+  - "../../assets/screenshots/elementorium-shop-elements-cubes.jpg"
+  - "../../assets/screenshots/elementorium-shop-minerals-tumbled.jpg"
+  - "../../assets/screenshots/elementorium-basket.jpg"
 ---
 
 Elementorium is a small but growing online shop for collectors of pure elements, raw minerals and natural gemstones, whether they are building a periodic table collection or adding specimens to a display cabinet.

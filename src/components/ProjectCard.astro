@@ -5,16 +5,24 @@ import Carousel from './Carousel.astro';
 import { statusMeta } from '../data/status-meta';
 import { getTechCategoryMap } from '../lib/tech-categories';
 import { techCategoryColors } from '../data/tech-category-colors';
+import { Image, getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  project: any;
+  project: CollectionEntry<'projects'>;
   linkTitle?: boolean;
 }
 
 const { project, linkTitle = false } = Astro.props;
 const detailHref = `/projects/${project.id}`;
 const hasBody = (project.body ?? '').trim().length > 0;
-const hasScreenshots = !!(project.data.screenshots && project.data.screenshots.length > 0);
+const screenshots = project.data.screenshots ?? [];
+const hasScreenshots = screenshots.length > 0;
+const fullSizeSrcs = await Promise.all(
+  screenshots.map(async (s: any) =>
+    (await getImage({ src: s, width: 1280, format: 'webp', quality: 80 })).src
+  )
+);
 
 const techCategoryMap = await getTechCategoryMap();
 function resolveTechColor(t: string): string {
@@ -51,21 +59,26 @@ function resolveTechColor(t: string): string {
 
   <p>{project.data.summary}</p>
 
-  {linkTitle && project.data.screenshots && project.data.screenshots.length > 0 && (
+  {linkTitle && hasScreenshots && (
     <div class="thumbnail-group" data-title={project.data.title}>
-      {project.data.screenshots.map((src: string, i: number) => (
-        <img
+      {screenshots.map((src: any, i: number) => (
+        <Image
           src={src}
+          width={120}
+          densities={[1, 2]}
+          format="webp"
+          quality={70}
           alt={`${project.data.title} screenshot ${i + 1}`}
           title="Click to enlarge"
           class="thumbnail-item"
+          data-full={fullSizeSrcs[i]}
         />
       ))}
     </div>
   )}
 
-  {!linkTitle && project.data.screenshots && project.data.screenshots.length > 0 && (
-    <Carousel images={project.data.screenshots} alt={project.data.title} />
+  {!linkTitle && hasScreenshots && (
+    <Carousel images={fullSizeSrcs} alt={project.data.title} />
   )}
 
   <p class="links-line">
@@ -232,13 +245,6 @@ function resolveTechColor(t: string): string {
   .links-line {
     line-height: 1.8;
   }
-  .thumbnail {
-    display: block;
-    width: 200px;
-    max-width: 100%;
-    border-radius: 6px;
-    margin: 0.5em 0;
-  }
   .thumbnail-group {
     display: flex;
     flex-wrap: wrap;
@@ -251,6 +257,7 @@ function resolveTechColor(t: string): string {
     border-radius: 6px;
     cursor: pointer;
     transition: opacity 0.15s ease;
+    height: auto;
   }
   .thumbnail-item:hover {
     opacity: 0.8;
@@ -265,7 +272,7 @@ function resolveTechColor(t: string): string {
 <script>
   document.querySelectorAll<HTMLElement>('.thumbnail-group').forEach((group) => {
     const thumbs = Array.from(group.querySelectorAll<HTMLImageElement>('.thumbnail-item'));
-    const srcs = thumbs.map((t) => t.src);
+    const srcs = thumbs.map((t) => t.dataset.full ?? t.src);
     const title = group.dataset.title ?? '';
 
     thumbs.forEach((thumb, i) => {
