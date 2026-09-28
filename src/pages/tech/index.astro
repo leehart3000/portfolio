@@ -6,24 +6,7 @@ import { techColors, defaultTechColor } from '../../data/tech-colors';
 import { techCategoryColors } from '../../data/tech-category-colors';
 import { techCategoryEmojis, defaultTechCategoryEmoji } from '../../data/tech-category-emojis';
 
-// The order categories appear in. Any category not listed here is added
-// alphabetically after these, and uncategorised tech goes last, in "Other".
-const categoryOrder = [
-  'Programming Language',
-  'Framework',
-  'Library',
-  'Database',
-  'Data Format',
-  'Cloud & Infrastructure',
-  'AI / ML',
-  'Testing',
-  'Tooling',
-  'IDE / Editor',
-  'CMS / Platform',
-  'Protocol / Standard',
-  'Concept / Practice',
-  'Design Tool',
-];
+// Categories are listed alphabetically, with uncategorised tech last, in "Other".
 const OTHER = 'Other';
 
 const allProjects = await getCollection('projects');
@@ -71,12 +54,10 @@ for (const t of techList) {
   groups.get(key)!.push(t);
 }
 
-const extraCategories = [...groups.keys()]
-  .filter((k) => !categoryOrder.includes(k) && k !== OTHER)
-  .sort((a, b) => a.localeCompare(b));
-
-const categories = [...categoryOrder, ...extraCategories, OTHER]
-  .filter((k) => groups.has(k))
+const categories = [...groups.keys()]
+  .filter((k) => k !== OTHER)
+  .sort((a, b) => a.localeCompare(b))
+  .concat(groups.has(OTHER) ? [OTHER] : [])
   .map((k) => ({
     name: k,
     id: `category-${slugify(k)}`,
@@ -102,7 +83,7 @@ const categories = [...categoryOrder, ...extraCategories, OTHER]
 
   {featuredTech.length > 0 && (
     <section id="featured" class="anchor-target">
-      <h2>Featured Technologies</h2>
+      <h2>Featured technologies:</h2>
       {featuredTech.map((t) => (
         <article class="tech-entry" style={`border: 2px solid ${t.borderColor}`}>
           <div class="tech-entry-header">
@@ -116,7 +97,7 @@ const categories = [...categoryOrder, ...extraCategories, OTHER]
             <span class="tech-entry-links">
               {t.hasProjects && <a href={`/tech/${t.slug}#projects`} class="cross-link" style="--badge-color: #D0E8F5">📁&nbsp;Projects</a>}
               {t.hasEmployments && <a href={`/tech/${t.slug}#employments`} class="cross-link" style="--badge-color: #E4D9F2">💼&nbsp;Employments</a>}
-              {t.hasCertificates && <a href={`/tech/${t.slug}#certificates`} class="cross-link" style="--badge-color: #FCEFC7">📚&nbsp;Certificates</a>}
+              {t.hasCertificates && <a href={`/tech/${t.slug}#certificates`} class="cross-link" style="--badge-color: #FCEFC7">📜&nbsp;Certificates</a>}
             </span>
           </div>
           {t.description && <p>{t.description}</p>}
@@ -125,7 +106,14 @@ const categories = [...categoryOrder, ...extraCategories, OTHER]
     </section>
   )}
 
-  <h2>All Technologies by Category</h2>
+  <h2>Technologies by category:</h2>
+
+  <p class="icon-key">
+    <span class="icon-key-label">Key:</span>
+    <a href="/projects">📁&nbsp;Projects</a>
+    <a href="/employments">💼&nbsp;Employments</a>
+    <a href="/certificates">📜&nbsp;Certificates</a>
+  </p>
 
   {categories.map((c) => (
     <details class="category-section anchor-target" id={c.id} style={`--section-color: ${c.color}`}>
@@ -145,7 +133,7 @@ const categories = [...categoryOrder, ...extraCategories, OTHER]
                 <a href={`/tech/${t.slug}#employments`} title="Employments" aria-label={`Employments applying ${t.name}`}>💼</a>
               )}
               {t.hasCertificates && (
-                <a href={`/tech/${t.slug}#certificates`} title="Certificates" aria-label={`Certificates covering ${t.name}`}>📚</a>
+                <a href={`/tech/${t.slug}#certificates`} title="Certificates" aria-label={`Certificates covering ${t.name}`}>📜</a>
               )}
             </span>
           </li>
@@ -311,6 +299,23 @@ const categories = [...categoryOrder, ...extraCategories, OTHER]
   }
   :root[data-theme="dark"] .cross-link:hover {
     filter: brightness(1.15);
+  }
+
+  /* Icon key */
+  .icon-key {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4em 1.2em;
+    font-size: 0.85em;
+    margin: -0.3em 0 1em;
+  }
+  .icon-key-label {
+    color: var(--color-text);
+    opacity: 0.8;
+  }
+  .icon-key a {
+    white-space: nowrap;
   }
 
   /* Category sections */

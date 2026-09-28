@@ -3,7 +3,7 @@ title: "Elementorium"
 status: "growing"
 order: 2
 summary: "Elementorium is a headless e-commerce shop for pure elements, raw minerals and natural gemstones, built with Astro and Tailwind CSS on Cloudflare Workers, with payments handled by Stripe."
-tech: ["Astro", "Tailwind CSS", "Cloudflare", "Cloudflare Workers", "Cloudflare Workers KV", "Bun", "Stripe", "Git", "GitHub", "GitHub Actions", "CI/CD", "JavaScript", "ES6", "HTML", "CSS", "JavaScript Object Notation (JSON)", "YAML", "serverless", "Application Programming Interface (API)", "e-commerce", "Responsive Web Design (RWD)", "Asynchronous JavaScript and XML (Ajax)", "Node.js", "DevOps", "ESLint", "Prettier", "Husky", "Google Analytics", "Sentry", "Vite"]
+tech: ["Astro", "Tailwind CSS", "Cloudflare", "Cloudflare Workers", "Cloudflare Workers KV", "Bun", "Stripe", "Git", "GitHub", "GitHub Actions", "CI/CD", "JavaScript", "ES6", "HTML", "CSS", "JavaScript Object Notation (JSON)", "YAML", "serverless", "Application Programming Interface (API)", "e-commerce", "Responsive Web Design (RWD)", "Asynchronous JavaScript and XML (Ajax)", "Node.js", "DevOps", "ESLint", "Prettier", "Husky", "Google Analytics", "Sentry", "Vite", "Microsoft Visual Studio Code (VS Code)"]
 liveUrl: "https://elementorium.co.uk"
 repoUrl: "https://github.com/leehart3000/elementorium"
 repoIsPrivate: true
