@@ -10,7 +10,7 @@ repoUrl: "https://github.com/malariagen/malariagen-data-python"
 repoIsPrivate: false
 ---
 
-MalariaGEN's data Python package (imported as `malariagen_data`) gives researchers direct access to MalariaGEN's large genomic data resources, covering both *Anopheles* mosquitoes and *Plasmodium* malaria parasites, without downloading entire datasets first. Data is read on demand from cloud storage, and the package provides analysis and plotting functions designed to be used interactively in Jupyter notebooks, including on Google Colab.
+MalariaGEN's Python package (imported as `malariagen_data`) gives researchers direct access to MalariaGEN's large genomic data resources, covering both *Anopheles* mosquitoes and *Plasmodium* malaria parasites, without downloading entire datasets first. Data is read on demand from cloud storage, and the package provides analysis and plotting functions designed to be used interactively in Jupyter notebooks, including on Google Colab.
 
 I contributed to the package over several years, while working for MalariaGEN at the University of Oxford, the Wellcome Sanger Institute (Genome Research Ltd) and the Liverpool School of Tropical Medicine. My work included:
 
