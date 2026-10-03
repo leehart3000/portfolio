@@ -7,6 +7,7 @@ import { getTechCategoryMap } from '../lib/tech-categories';
 import { techCategoryColors } from '../data/tech-category-colors';
 import { Image, getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import LogoMark from './LogoMark.astro';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -35,7 +36,10 @@ function resolveTechColor(t: string): string {
 <article>
   <div class="project-header">
     <div class="project-title-line">
-      {project.data.logo && (
+      {project.data.logo === '/logo.svg' ? (
+        // This site's own logo: drawn inline so it follows the light/dark toggle
+        <LogoMark class="project-logo-mark" />
+      ) : project.data.logo && (
         <img class="project-logo" src={project.data.logo} alt="" />
       )}
       <h3>
@@ -174,6 +178,10 @@ function resolveTechColor(t: string): string {
     width: 1.4em;
     height: 1.4em;
     object-fit: contain;
+  }
+  .project-logo-mark {
+    height: 1.4em;
+    width: auto;
   }
   .status-badge {
     grid-column: 3;
