@@ -6,10 +6,13 @@ const projects = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     status: z.enum(['mature', 'growing', 'seedling']),
+    // "creation" = my own project; "contribution" = someone else's project I've contributed to.
+    kind: z.enum(['creation', 'contribution']).default('creation'),
     summary: z.string(),
     tech: z.array(z.string()),
     liveUrl: z.string().url().optional(),
     demoUrl: z.string().url().optional(),
+    docsUrl: z.string().url().optional(),
     repoUrl: z.string().url().optional(),
     repoIsPrivate: z.boolean().default(false),
     logo: z.string().optional(),
