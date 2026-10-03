@@ -5,7 +5,7 @@ provider: "DataCamp"
 providerUrl: "https://www.datacamp.com/"
 url: "https://www.datacamp.com/completed/statement-of-accomplishment/track/4027df5767e366c4c091d826d7ced78bddc62d13"
 summary: "From data manipulation to machine learning, I gained Python skills in the field of data science."
-tech: ["Python", "NumPy", "Matplotlib", "Pandas", "Seaborn", "Machine Learning (ML)"]
+tech: ["Python", "NumPy", "Matplotlib", "Pandas", "Seaborn", "Machine Learning (ML)", "Application Programming Interface (API)", "Decision Tree", "Delimiter-Separated Values (DSV)", "HDF5", "hierarchical clustering", "HTML", "k-means clustering", "Microsoft Excel", "PostgreSQL", "Principal Component Analysis (PCA)", "Random Forest", "scikit-learn", "SciPy", "SQL", "SQLite"]
 completionDate: "17 Dec 2020"
 duration: "88 hours"
 order: 99

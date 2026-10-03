@@ -10,7 +10,7 @@ I developed code, scripts and automations, using generative and agentic AI, incl
 I applied Generative AI (GenAI) techniques for application design, architecture, bug detection, code refactoring and program optimization. 
 I identified GenAI programming risks and ethics issues, and selected mitigation strategies. 
 "
-tech: ["Generative AI (GenAI)", "ChatGPT", "GitHub Copilot", "Google Gemini", "n8n", "Bolt", "Artificial Intelligence (AI)", "CI/CD", "agentic AI", "vibe coding"]
+tech: ["Generative AI (GenAI)", "ChatGPT", "GitHub Copilot", "Google Gemini", "n8n", "Bolt", "Artificial Intelligence (AI)", "CI/CD", "agentic AI"]
 completionDate: "14 May 2026"
 duration: "23 hours"
 ---
