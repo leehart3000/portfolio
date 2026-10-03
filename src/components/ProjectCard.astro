@@ -81,7 +81,7 @@ function resolveTechColor(t: string): string {
     <Carousel images={fullSizeSrcs} alt={project.data.title} />
   )}
 
-  <p class="links-line">
+<p class="links-line">
     {linkTitle && (
       <>→&nbsp;<a href={detailHref}>Learn more about {project.data.title}</a><br /></>
     )}
@@ -90,6 +90,9 @@ function resolveTechColor(t: string): string {
     )}
     {!project.data.liveUrl && project.data.demoUrl && (
       <>🧪&nbsp;Demo site: <a href={project.data.demoUrl} target="_blank" rel="noopener noreferrer">{project.data.demoUrl}</a><br /></>
+    )}
+    {project.data.docsUrl && (
+      <>📖&nbsp;Documentation: <a href={project.data.docsUrl} target="_blank" rel="noopener noreferrer">{project.data.docsUrl}</a><br /></>
     )}
     {project.data.repoUrl && (
       project.data.repoIsPrivate ? (
