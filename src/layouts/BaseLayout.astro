@@ -1,6 +1,7 @@
 ---
 import CookieConsent from '../components/CookieConsent.astro';
 import Lightbox from '../components/Lightbox.astro';
+import LogoMark from '../components/LogoMark.astro';
 
 interface Props {
 	title: string;
@@ -34,7 +35,7 @@ const orcidUrl = 'https://orcid.org/0000-0002-6473-0964';
 
 		<header class="site-header">
 			<a href="/" class="brand">
-				<img src="/logo.svg" alt="" width="40" height="40" class="logo-img" />
+				<LogoMark />
 				<span class="wordmark">
 					<span class="hart">Hart</span><span class="soft">Soft</span><span class="dot">.</span><span class="dev">Dev</span>
 				</span>
@@ -204,10 +205,6 @@ const orcidUrl = 'https://orcid.org/0000-0002-6473-0964';
       align-items: baseline;
       border-top: 1px solid var(--color-border);
       font-size: 0.9em;
-    }
-    .logo-img {
-      position: relative;
-      top: 0.35em;
     }
     .brand {
       display: flex;
