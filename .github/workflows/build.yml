@@ -1,0 +1,29 @@
+# Builds the site on every pull request, so problems show up
+# as a ❌ on the PR before merging, not as a failed deploy after.
+name: Build
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v5
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install exact dependency versions
+        run: npm ci
+
+      - name: Build the site
+        run: npm run build
