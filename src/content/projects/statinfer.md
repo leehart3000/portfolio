@@ -3,7 +3,7 @@ title: "statinfer"
 status: "growing"
 order: 4
 summary: "statinfer is a JavaScript and TypeScript package for statistical inference, providing classic hypothesis tests with confidence intervals, checked against SciPy and statsmodels, with no runtime dependencies."
-tech: ["Git", "GitHub", "GitHub Actions", "CI/CD", "JavaScript", "JavaScript Object Notation (JSON)", "YAML", "Python", "React", "HTML", "CSS", "Application Programming Interface (API)", "Node.js", "npm", "ES6", "JSX", "SciPy", "NumPy", "Responsive Web Design (RWD)", "Mermaid", "TruffleHog", "TypeScript", "TSX", "MDX", "CommonJS", "Next.js", "pnpm", "fnm", "uv", "Vitest", "ESLint", "TypeDoc", "Rolldown", "tsdown", "Snyk", "Vercel", "GitHub Pages", "Microsoft Visual Studio Code (VS Code)"]
+tech: ["Git", "GitHub", "GitHub Actions", "CI/CD", "JavaScript", "JavaScript Object Notation (JSON)", "YAML", "Python", "React", "HTML", "CSS", "Application Programming Interface (API)", "Node.js", "npm", "ES6", "JSX", "SciPy", "NumPy", "Responsive Web Design (RWD)", "Mermaid", "TruffleHog", "TypeScript", "TSX", "MDX", "CommonJS", "Next.js", "pnpm", "fnm", "uv", "Vitest", "ESLint", "TypeDoc", "Rolldown", "tsdown", "Snyk", "Vercel", "GitHub Pages", "Microsoft Visual Studio Code (VS Code)", "Generative AI (GenAI)"]
 demoUrl: "https://statinfer.vercel.app/"
 repoUrl: "https://github.com/leehart3000/statinfer"
 repoIsPrivate: false

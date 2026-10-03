@@ -4,8 +4,14 @@ type: "Professional Certificate"
 provider: "Coursera"
 providerUrl: "https://www.coursera.org/"
 url: "https://coursera.org/share/b56f3442163f184c5d6292b92819d151"
-summary: ""
-tech: ["CI/CD", "Git", "JavaScript", "Django ORM", "GitHub", "HTML", "CSS", "React", "Bootstrap", "Express", "Node.js", "Python", "Django", "Docker", "Kubernetes", "microservices", "serverless", "cloud computing", "Flask", "SQL", "Istio", "OpenShift", "containers"]
+summary: "
+I learnt how to develop with front-end development languages and tools such as HTML, CSS, JavaScript, React and Bootstrap. 
+
+I learnt how to program applications using back-end languages and frameworks like Express, Node.js, Python, Django, etc. 
+
+I learnt how to deploy and scale applications using Cloud Native methodologies and tools like Containers, Kubernetes, Microservices and Serverless Functions. 
+"
+tech: ["CI/CD", "Git", "JavaScript", "Django ORM", "GitHub", "HTML", "CSS", "React", "Bootstrap", "Express", "Node.js", "Python", "Django", "Docker", "Kubernetes", "microservices", "serverless", "cloud computing", "Flask", "SQL", "Istio", "OpenShift", "containers", "agentic AI", "Application Programming Interface (API)", "Artificial Intelligence (AI)", "AWS", "Beautiful Soup", "Bolt", "ChatGPT", "DevOps", "ES6", "Generative AI (GenAI)", "GitHub Copilot", "Google Cloud Platform (GCP)", "Google Gemini", "IBM Cloud", "IBM Code Engine", "IBM Watson AI Libraries", "Integrated Development Environment (IDE)", "JSX", "Jupyter Notebook", "Microsoft Azure", "n8n", "npm", "NumPy", "Pandas", "Postman", "React Redux", "Responsive Web Design (RWD)", "REST", "Swagger UI", "Unified Modeling Language (UML)", "YAML"]
 completionDate: "16 May 2026"
 duration: "219 hours"
 order: 1

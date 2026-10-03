@@ -17,7 +17,7 @@ const GA_MEASUREMENT_ID = 'G-BTKPVYL1NH';
 <style>
   .cookie-banner {
     background: var(--color-bg-header);
-    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
     padding: 0.8em 1.25em;
     display: flex;
     flex-wrap: wrap;
@@ -25,6 +25,9 @@ const GA_MEASUREMENT_ID = 'G-BTKPVYL1NH';
     justify-content: space-between;
     gap: 1em;
     font-size: 0.9em;
+  }
+  .cookie-banner[hidden] {
+    display: none;
   }
   .cookie-banner p {
     margin: 0;
