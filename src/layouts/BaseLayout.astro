@@ -4,8 +4,12 @@ import Lightbox from '../components/Lightbox.astro';
 
 interface Props {
 	title: string;
+	description?: string;
 }
-const { title } = Astro.props;
+const {
+	title,
+	description = 'Lee Hart’s software development: projects, technologies, employments, certificates.',
+} = Astro.props;
 const year = new Date().getFullYear();
 const orcidUrl = 'https://orcid.org/0000-0002-6473-0964';
 ---
@@ -17,6 +21,7 @@ const orcidUrl = 'https://orcid.org/0000-0002-6473-0964';
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+    <meta name="description" content={description} />
 		<script is:inline>
 			// Applied before paint to avoid a flash of the wrong theme.
 			const saved = localStorage.getItem('theme');
