@@ -14,11 +14,11 @@
     "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "13.6.1",
+    "@astrojs/cloudflare": "13.7.0",
     "astro": "6.4.8"
   },
   "devDependencies": {
-    "wrangler": "^4.98.0"
+    "wrangler": "^4.144.0"
   },
   "overrides": {
     "vite": "^7"
