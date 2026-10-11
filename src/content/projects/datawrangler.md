@@ -3,7 +3,7 @@ title: "DataWrangler"
 status: "growing"
 order: 6
 summary: "DataWrangler is a free, open-source web tool for cleaning, checking and preparing data files, such as CSV and TSV, without writing any code."
-tech: ["htmx", "HTML", "CSS", "Delimiter-Separated Values (DSV)", "Git", "GitLab"]
+tech: ["Python", "Flask", "Gunicorn", "DuckDB", "Pydantic", "htmx", "HTML", "CSS", "Delimiter-Separated Values (DSV)", "Sentry", "uv", "Pytest", "Playwright", "Ruff", "Mypy", "Git", "GitLab"]
 liveUrl: "https://datawrangler.org"
 repoUrl: "https://gitlab.com/leehart3000/datawrangler"
 repoIsPrivate: false
@@ -24,4 +24,6 @@ DataWrangler helps people tidy up data files in the browser, step by step, with 
 
 The file "stays faithful": nothing is changed unless you ask for it. Uploaded files are processed and then deleted straight away, and nothing is stored.
 
-The interface is server-driven and uses htmx for its interactive steps. DataWrangler is free software, released under the GNU Affero General Public License (AGPL-3.0), with its source code on GitLab.
+Behind the scenes, DataWrangler is a Python web app built with Flask and served by Gunicorn. DuckDB does the heavy lifting on the data, Pydantic validates settings and inputs, and htmx drives the step-by-step interface without a heavy JavaScript front end. Errors are reported to Sentry. The project is managed with uv, linted with Ruff, type-checked with Mypy, and tested with Pytest, including end-to-end tests that drive a real browser with Playwright.
+
+DataWrangler is free software, released under the GNU Affero General Public License (AGPL-3.0), with its source code on GitLab.
