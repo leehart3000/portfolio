@@ -24,7 +24,7 @@ const allStatuses = Object.keys(statusMeta) as StatusKey[];
 const introText = meta.description.charAt(0).toLowerCase() + meta.description.slice(1);
 ---
 
-<BaseLayout title={`Lee Hart - Project Status: ${meta.label}`}>
+<BaseLayout title={`Project Status: ${meta.label}`}>
   <nav class="status-nav">
     <a href="/project-statuses" class="status-nav-all">Project Statuses:</a>
     {allStatuses.map((s) => (

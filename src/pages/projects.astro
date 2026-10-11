@@ -10,7 +10,7 @@ const creations = allProjects.filter((p) => p.data.kind === 'creation');
 const contributions = allProjects.filter((p) => p.data.kind === 'contribution');
 ---
 
-<BaseLayout title="Lee Hart - Projects">
+<BaseLayout title="Projects">
   <h1>Recent creations</h1>
   <p>
     A selection of what I'm currently building — from live, working
@@ -24,7 +24,7 @@ const contributions = allProjects.filter((p) => p.data.kind === 'contribution');
     <section id="other-projects">
       <h2>Other projects</h2>
       <p>
-        Established projects that I've contributed to as part of a team.
+        Established open-source projects that I've contributed to.
       </p>
       {contributions.map((project) => <ProjectCard project={project} linkTitle={true} />)}
     </section>
