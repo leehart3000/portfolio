@@ -4,13 +4,14 @@ import Lightbox from '../components/Lightbox.astro';
 import LogoMark from '../components/LogoMark.astro';
 
 interface Props {
-	title: string;
+	title?: string;
 	description?: string;
 }
 const {
 	title,
 	description = 'Lee Hart’s software development: projects, technologies, employments, certificates.',
 } = Astro.props;
+const fullTitle = title ? `${title} | Lee Hart` : 'Lee Hart | Software Development';
 const year = new Date().getFullYear();
 const orcidUrl = 'https://orcid.org/0000-0002-6473-0964';
 ---
@@ -21,7 +22,7 @@ const orcidUrl = 'https://orcid.org/0000-0002-6473-0964';
 		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{fullTitle}</title>
     <meta name="description" content={description} />
 		<script is:inline>
 			// Applied before paint to avoid a flash of the wrong theme.

@@ -17,7 +17,7 @@ const { Content } = await render(employment);
 const hasBody = (employment.body ?? '').trim().length > 0;
 ---
 
-<BaseLayout title={`Lee Hart - ${employment.data.name}`}>
+<BaseLayout title={`${employment.data.name}`}>
   <Breadcrumb parentLabel="Employments" parentHref="/employments" current={employment.data.name} />
   <EmploymentCard employment={employment} />
   {hasBody && (
