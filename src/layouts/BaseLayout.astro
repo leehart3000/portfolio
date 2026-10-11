@@ -20,7 +20,7 @@ const orcidUrl = 'https://orcid.org/0000-0002-6473-0964';
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -158,6 +158,10 @@ const orcidUrl = 'https://orcid.org/0000-0002-6473-0964';
       margin: 0 auto;
       width: 100%;
       padding: 0.75em 1.25em 2em;
+      overflow-wrap: break-word;
+    }
+    main a {
+      overflow-wrap: anywhere;
     }
     main > :first-child {
       margin-top: 0;
