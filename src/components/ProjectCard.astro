@@ -280,6 +280,18 @@ function resolveTechColor(t: string): string {
   :root[data-theme="dark"] .tech-badge:hover {
     filter: brightness(1.15);
   }
+  @media (max-width: 600px) {
+    .project-header {
+      grid-template-columns: 1fr;
+      gap: 0.4em;
+    }
+    .project-title-line,
+    .more-info-link,
+    .status-badge {
+      grid-column: 1;
+      justify-self: start;
+    }
+  }
 </style>
 <script>
   document.querySelectorAll<HTMLElement>('.thumbnail-group').forEach((group) => {
