@@ -54,8 +54,8 @@ const url = techEntry?.data.url;
   {matchingProjects.length > 0 && (
     <>
       <div class="section-heading-row">
-        <h2 id="projects" class="projects-heading">Recent projects using {techName}</h2>
-        <a href="/projects" class="section-all-link">📁&nbsp;All&nbsp;Recent&nbsp;Projects</a>
+        <h2 id="projects" class="projects-heading">Projects using {techName}</h2>
+        <a href="/projects" class="section-all-link">📁&nbsp;All&nbsp;Projects</a>
       </div>
       {matchingProjects.map((project) => <ProjectCard project={project} linkTitle={true} />)}
     </>

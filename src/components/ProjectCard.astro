@@ -86,7 +86,7 @@ function resolveTechColor(t: string): string {
   )}
 
 <p class="links-line">
-    {linkTitle && (
+    {linkTitle && (hasBody || hasScreenshots) && (
       <>→&nbsp;<a href={detailHref}>Learn more about {project.data.title}</a><br /></>
     )}
     {project.data.liveUrl && (
