@@ -3,7 +3,7 @@ title: "DataWrangler"
 status: "growing"
 order: 6
 summary: "DataWrangler is a free, open-source web tool for cleaning, checking and preparing data files, such as CSV and TSV, without writing any code."
-tech: ["Python", "Flask", "Gunicorn", "DuckDB", "Pydantic", "htmx", "HTML", "CSS", "Delimiter-Separated Values (DSV)", "Sentry", "uv", "Pytest", "Playwright", "Ruff", "Mypy", "Git", "GitLab"]
+tech: ["Python", "Flask", "Gunicorn", "DuckDB", "Pydantic", "htmx", "HTML", "CSS", "Delimiter-Separated Values (DSV)", "Sentry", "uv", "Pytest", "Playwright", "Ruff", "Mypy", "Git", "GitLab", "Generative AI (GenAI)"]
 liveUrl: "https://datawrangler.org"
 repoUrl: "https://gitlab.com/leehart3000/datawrangler"
 repoIsPrivate: false
