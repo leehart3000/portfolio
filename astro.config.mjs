@@ -8,6 +8,9 @@ export default defineConfig({
 	adapter: cloudflare({
 		imageService: 'compile',
 	}),
+  redirects: {
+    '/projects/tetraminos': '/projects/codonandon',
+  },
 	markdown: {
     rehypePlugins: [
       [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],

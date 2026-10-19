@@ -1,21 +1,21 @@
 ---
-title: "Tetraminos"
+title: "Codonandon"
 status: "growing"
 order: 7
-summary: "Tetraminos is an educational falling-blocks game about mRNA, codons and amino acids: cleared rows are read as genetic code, and players build amino-acid chains for bonus points."
+summary: "Codonandon is an educational falling-blocks game about mRNA, codons and amino acids: cleared rows are read as genetic code, and players build amino-acid chains for bonus points."
 tech: ["SvelteKit", "Svelte", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind CSS", "Flexbox", "CSS Grid", "HTML Canvas", "Web Audio API", "Progressive Web App (PWA)", "Responsive Web Design (RWD)", "Vite", "Cloudflare", "Cloudflare Workers", "Cloudflare D1", "SQLite", "SQL", "Cloudflare Turnstile", "Cloudflare Web Analytics", "Cloudflare Wrangler", "Sentry", "Vitest", "Playwright", "ESLint", "Prettier", "Husky", "pnpm", "fnm", "GitHub Actions", "CI/CD", "Dependabot", "TruffleHog", "Git", "GitHub", "Microsoft Visual Studio Code (VS Code)", "Generative AI (GenAI)"]
-liveUrl: "https://tetraminos.hartsoft.dev/"
-repoUrl: "https://github.com/leehart3000/tetraminos"
+liveUrl: "https://codonandon.hartsoft.dev/"
+repoUrl: "https://github.com/leehart3000/codonandon"
 repoIsPrivate: false
-logo: "/logos/tetraminos.svg"
+logo: "/logos/codonandon.svg"
 screenshots:
-  - "../../assets/screenshots/tetraminos-start.jpg"
-  - "../../assets/screenshots/tetraminos-game.jpg"
-  - "../../assets/screenshots/tetraminos-settings.jpg"
-  - "../../assets/screenshots/tetraminos-scores.jpg"
+  - "../../assets/screenshots/codonandon-start.jpg"
+  - "../../assets/screenshots/codonandon-game.jpg"
+  - "../../assets/screenshots/codonandon-settings.jpg"
+  - "../../assets/screenshots/codonandon-scores.jpg"
 ---
 
-Tetraminos is a falling-blocks game with a biology twist. Every square is an mRNA base (A, U, G or C), and each cleared row is read as a strand of mRNA. A start codon (AUG) begins a chain, each following codon adds an amino acid using the standard genetic code, and a stop codon (UAA, UAG or UGA) banks the chain for bonus points.
+Codonandon is a falling-blocks game with a biology twist. Every square is an mRNA base (A, U, G or C), and each cleared row is read as a strand of mRNA. A start codon (AUG) begins a chain, each following codon adds an amino acid using the standard genetic code, and a stop codon (UAA, UAG or UGA) banks the chain for bonus points.
 
 Features include:
 
@@ -32,4 +32,4 @@ The game is built with SvelteKit and Svelte 5 in TypeScript, styled with Tailwin
 
 Every push runs the full set of checks on GitHub Actions (type checks, ESLint and Prettier, Vitest unit and component tests, Playwright end-to-end tests, and a TruffleHog secret scan) before deploying automatically to Cloudflare. Dependabot keeps dependencies up to date.
 
-Tetraminos is free software under the GNU Affero General Public License (AGPL-3.0). It is not affiliated with or endorsed by Tetris or The Tetris Company.
+Codonandon is free software under the GNU Affero General Public License (AGPL-3.0). It is not affiliated with or endorsed by Tetris or The Tetris Company.
