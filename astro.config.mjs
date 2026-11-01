@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 import rehypeExternalLinks from 'rehype-external-links';
+import { unified } from '@astrojs/markdown-remark';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,8 +16,13 @@ export default defineConfig({
     '/tech/asynchronous-javascript-and-xml-ajax': '/tech/ajax',
   },
 	markdown: {
-    rehypePlugins: [
-      [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
-    ],
+    processor: unified({
+      rehypePlugins: [
+        [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+      ],
+    }),
   },
+  // Astro 7 changed the default to 'jsx', which can remove spaces between
+  // inline elements; keep Astro 6's behaviour.
+  compressHTML: true,
 });
