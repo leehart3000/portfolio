@@ -8,6 +8,7 @@ tech: ["Python", "FastAPI", "Uvicorn", "Pydantic", "SQLAlchemy", "Alembic", "Pos
 repoUrl: "https://github.com/leehart3000/protolims"
 repoIsPrivate: false
 logo: "/logos/protolims.svg"
+logoDark: "/logos/protolims-dark.svg"
 screenshots:
   - "../../assets/screenshots/protolims-home.jpg"
   - "../../assets/screenshots/protolims-projects.jpg"

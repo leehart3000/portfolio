@@ -40,7 +40,12 @@ function resolveTechColor(t: string): string {
         // This site's own logo: drawn inline so it follows the light/dark toggle
         <LogoMark class="project-logo-mark" />
       ) : project.data.logo && (
-        <img class="project-logo" src={project.data.logo} alt="" />
+        <>
+          <img class:list={['project-logo', { 'logo-light': project.data.logoDark }]} src={project.data.logo} alt="" />
+          {project.data.logoDark && (
+            <img class="project-logo logo-dark" src={project.data.logoDark} alt="" />
+          )}
+        </>
       )}
       <h3>
         {linkTitle ? (
@@ -178,6 +183,15 @@ function resolveTechColor(t: string): string {
     width: 1.4em;
     height: 1.4em;
     object-fit: contain;
+  }
+  .logo-dark {
+    display: none;
+  }
+  :root[data-theme="dark"] .logo-light {
+    display: none;
+  }
+  :root[data-theme="dark"] .logo-dark {
+    display: inline;
   }
   .project-title-line :global(.project-logo-mark) {
     height: 1.4em;

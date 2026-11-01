@@ -16,6 +16,7 @@ const projects = defineCollection({
     repoUrl: z.string().url().optional(),
     repoIsPrivate: z.boolean().default(false),
     logo: z.string().optional(),
+    logoDark: z.string().optional(),
     screenshots: z.array(image()).optional(),
     order: z.number().default(0),
   }),
