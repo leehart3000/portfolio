@@ -15,7 +15,7 @@ summary: "
 
   I learnt how to integrate commonly used React libraries to streamline application development. 
   "
-tech: ["React", "JavaScript", "Jest", "Webpack"]
+tech: ["React", "JavaScript", "Jest", "webpack"]
 completionDate: "04 June 2026"
 duration: "26 hours"
 ---

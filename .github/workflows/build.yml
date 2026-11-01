@@ -25,5 +25,8 @@ jobs:
       - name: Install exact dependency versions
         run: npm ci
 
+      - name: Check tech names
+        run: node scripts/check-tech-names.mjs
+
       - name: Build the site
         run: npm run build

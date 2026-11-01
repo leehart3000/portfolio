@@ -4,7 +4,7 @@ status: "growing"
 kind: "contribution"
 order: 2
 summary: "Panoptes is an open-source web application for exploring and visualising genomic and other tabular datasets, developed by the Centre for Genomics and Global Health (CGGH). I contributed to the web app between Nov 2015 and Mar 2019."
-tech: ["Python", "Web Server Gateway Interface (WSGI)", "Gunicorn", "MonetDB", "SQL", "Biopython", "JavaScript", "ES6", "React", "Material UI", "Leaflet", "D3", "Plotly", "Lodash", "Handlebars", "JSON", "HTML", "CSS", "Sass", "Webpack", "Babel", "ESLint", "Jest", "Yarn", "npm", "Node.js", "Google Cloud Storage (GCS)", "Google Analytics", "Markdown", "Git", "GitHub", "API", "GNU/Linux"]
+tech: ["Python", "Web Server Gateway Interface (WSGI)", "Gunicorn", "MonetDB", "SQL", "Biopython", "JavaScript", "ES6", "React", "Material UI", "Leaflet", "D3", "Plotly", "Lodash", "Handlebars", "JSON", "HTML", "CSS", "Sass", "webpack", "Babel", "ESLint", "Jest", "Yarn", "npm", "Node.js", "Google Cloud Storage (GCS)", "Google Analytics", "Markdown", "Git", "GitHub", "API", "GNU/Linux"]
 docsUrl: "https://panoptes.readthedocs.org/"
 repoUrl: "https://github.com/cggh/panoptes"
 repoIsPrivate: false

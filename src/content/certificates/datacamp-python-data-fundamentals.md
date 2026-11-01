@@ -5,7 +5,7 @@ provider: "DataCamp"
 providerUrl: "https://www.datacamp.com/"
 url: "https://www.datacamp.com/completed/statement-of-accomplishment/track/e0772f4865e330f0cd3a046d225e6a3af8188392"
 summary: "I develeoped my coding skills by discovering how to manipulate dictionaries and DataFrames, visualize real-world data, and write my own Python functions."
-tech: ["Python", "Pandas", "NumPy", "Matplotlib"]
+tech: ["Python", "pandas", "NumPy", "Matplotlib"]
 completionDate: "17 Dec 2020"
 duration: "15 hours"
 order: 99
