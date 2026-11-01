@@ -10,7 +10,7 @@ I applied prompt templates, chains and agents to create flexible and context-awa
 I developed a GenAI web application with Flask, and integrated JSON output-parsing, for structured AI responses. 
 I evaluated and compared different Large Language Models (LLMs) to select the most suitable for specific use cases, to ensure optimal performance and reliability. 
 "
-tech: ["Artificial Intelligence (AI)", "Generative AI (GenAI)", "JavaScript Object Notation (JSON)", "prompt engineering", "Large Language Model (LLM)", "Flask", "LangChain"]
+tech: ["Artificial Intelligence (AI)", "Generative AI (GenAI)", "JSON", "prompt engineering", "Large Language Model (LLM)", "Flask", "LangChain"]
 completionDate: "03 Jul 2026"
 duration: "9 hours"
 ---

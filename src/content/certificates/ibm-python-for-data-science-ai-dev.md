@@ -10,7 +10,7 @@ I applied Python programming logic using data structures, conditions and branchi
 I demonstrated proficiency in using Python libraries such as Pandas and Numpy and developing code using Jupyter Notebooks. 
 I learnt how to access and extract web-based data by working with REST APIs, using requests and performing web scraping with Beautiful Soup. 
 "
-tech: ["Python", "NumPy", "Jupyter Notebook", "REST", "Pandas", "Beautiful Soup", "Application Programming Interface (API)"]
+tech: ["Python", "NumPy", "Jupyter Notebook", "REST", "Pandas", "Beautiful Soup", "API"]
 completionDate: "08 Apr 2026"
 duration: "24 hours"
 ---

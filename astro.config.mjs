@@ -10,6 +10,9 @@ export default defineConfig({
 	}),
   redirects: {
     '/projects/tetraminos': '/projects/codonandon',
+    '/tech/application-programming-interface-api': '/tech/api',
+    '/tech/javascript-object-notation-json': '/tech/json',
+    '/tech/asynchronous-javascript-and-xml-ajax': '/tech/ajax',
   },
 	markdown: {
     rehypePlugins: [

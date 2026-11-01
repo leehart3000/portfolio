@@ -10,7 +10,7 @@ I created REST API endpoints and invoked them using cURL and Postman.
 I used SwaggerUI to document and test APIs. 
 I created and deployed microservices using Docker containers and serverless technologies like IBM Code Engine. 
 "
-tech: ["REST", "Application Programming Interface (API)", "microservices", "Postman", "Swagger UI", "Docker", "serverless", "IBM Code Engine", "containers"]
+tech: ["REST", "API", "microservices", "Postman", "Swagger UI", "Docker", "serverless", "IBM Code Engine", "containers"]
 completionDate: "29 Apr 2026"
 duration: "16 hours"
 ---
