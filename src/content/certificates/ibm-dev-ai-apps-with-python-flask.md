@@ -10,7 +10,7 @@ I created Python modules, ran unit tests and packaged applications, while ensuri
 I built and deployed web applications using Flask, including routing, error handling and CRUD operations. 
 I created and deployed an AI-based application onto a web server using IBM Watson AI Libraries and Flask. 
 "
-tech: ["Python", "Artificial Intelligence (AI)", "Application Programming Interface (API)", "REST", "Flask", "Integrated Development Environment (IDE)", "IBM Watson AI Libraries"]
+tech: ["Python", "Artificial Intelligence (AI)", "API", "REST", "Flask", "Integrated Development Environment (IDE)", "IBM Watson AI Libraries"]
 completionDate: "14 Apr 2026"
 duration: "11 hours"
 ---

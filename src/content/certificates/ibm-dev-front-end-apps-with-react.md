@@ -10,7 +10,7 @@ I built dynamic front-end applications with reusable React components.
 I employed various React concepts and features, including props, states, hooks, forms and Redux. 
 I demonstrated my React skills by building several front-end applications, such as a shopping cart. 
 "
-tech: ["React", "JavaScript", "Application Programming Interface (API)", "React Redux", "JSX", "ES6"]
+tech: ["React", "JavaScript", "API", "React Redux", "JSX", "ES6"]
 completionDate: "17 Mar 2026"
 duration: "15 hours"
 ---

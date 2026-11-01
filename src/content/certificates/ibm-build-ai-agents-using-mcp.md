@@ -13,7 +13,7 @@ I learnt how to develop MCP clients that connect to single and multiple servers 
 
 I learnt how to implement secure, interactive MCP workflows by applying sampling, roots and permission-based user-approval mechanisms for multi-agent applications.
 "
-tech: ["agentic AI", "Artificial Intelligence (AI)", "JavaScript Object Notation (JSON)", "Model Context Protocol (MCP)", "Large Language Model (LLM)", "FastMCP", "Retrieval-Augmented Generation (RAG)"]
+tech: ["agentic AI", "Artificial Intelligence (AI)", "JSON", "Model Context Protocol (MCP)", "Large Language Model (LLM)", "FastMCP", "Retrieval-Augmented Generation (RAG)"]
 completionDate: "30 Oct 2026"
 duration: "10 hours"
 ---
