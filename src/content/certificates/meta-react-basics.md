@@ -13,7 +13,7 @@ summary: "
 
   I learnt how to build an application in React, and how to use forms to allow users to interact with it. 
   "
-tech: ["React", "JavaScript", "Webpack", "HTML", "CSS"]
+tech: ["React", "JavaScript", "webpack", "HTML", "CSS"]
 completionDate: "13 Feb 2026"
 duration: "29 hours"
 ---

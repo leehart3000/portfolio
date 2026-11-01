@@ -4,7 +4,7 @@ status: "mature"
 kind: "contribution"
 order: 1
 summary: "The MalariaGEN data Python package is MalariaGEN's open-source Python package for accessing and analysing malaria parasite and mosquito genomic data in the cloud. I contributed to the package between Nov 2021 and Jan 2026."
-tech: ["Python", "NumPy", "Pandas", "SciPy", "Xarray", "Zarr", "Dask", "Numba", "Biopython", "Plotly", "Bokeh", "Leaflet", "Pydantic", "Jupyter Notebook", "JupyterLab", "Google Cloud Storage (GCS)", "Amazon S3", "Conda", "Poetry", "Pytest", "Ruff", "Mypy", "Sphinx", "GitHub Pages", "GitHub Actions", "Git", "GitHub", "API", "GNU/Linux", "cloud computing", "Codecov", "CI/CD"]
+tech: ["Python", "NumPy", "pandas", "SciPy", "Xarray", "Zarr", "Dask", "Numba", "Biopython", "Plotly", "Bokeh", "Leaflet", "Pydantic", "Jupyter Notebook", "JupyterLab", "Google Cloud Storage (GCS)", "Amazon S3", "conda", "Poetry", "Pytest", "Ruff", "Mypy", "Sphinx", "GitHub Pages", "GitHub Actions", "Git", "GitHub", "API", "GNU/Linux", "cloud computing", "Codecov", "CI/CD"]
 docsUrl: "https://malariagen.github.io/malariagen-data-python/latest/"
 repoUrl: "https://github.com/malariagen/malariagen-data-python"
 repoIsPrivate: false

@@ -11,7 +11,7 @@ summary: "
 
   I learnt how to fetch, process and display API data effectively within React applications. 
   "
-tech: ["React", "JavaScript", "HTML", "Jest", "CSS", "Webpack"]
+tech: ["React", "JavaScript", "HTML", "Jest", "CSS", "webpack"]
 completionDate: "04 June 2026"
 duration: "55 hours"
 relatedCertificates:

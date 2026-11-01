@@ -13,7 +13,7 @@ summary: "
 
   I developed web-based AI applications using Python libraries, such as Flask and Gradio, along with basic front-end tech like HTML, CSS and JavaScript. 
   "
-tech: ["LangChain", "OpenAI API", "Natural Language Processing (NLP)", "Speech-To-Text (STT)", "Text-To-Speech (TTS)", "Generative AI (GenAI)", "Large Language Model (LLM)", "IBM watsonx", "Hugging Face", "Artificial Intelligence (AI)", "Retrieval-Augmented Generation (RAG)", "Python", "Flask", "Gradio", "HTML", "CSS", "JavaScript"]
+tech: ["LangChain", "OpenAI API", "Natural Language Processing (NLP)", "Speech-to-Text (STT)", "Text-to-Speech (TTS)", "Generative AI (GenAI)", "Large Language Model (LLM)", "IBM watsonx", "Hugging Face", "Artificial Intelligence (AI)", "Retrieval-Augmented Generation (RAG)", "Python", "Flask", "Gradio", "HTML", "CSS", "JavaScript"]
 completionDate: "29 May 2026"
 duration: "14 hours"
 ---

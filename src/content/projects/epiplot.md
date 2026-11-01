@@ -3,7 +3,7 @@ title: "Epiplot"
 status: "growing"
 order: 5
 summary: "Epiplot is a Python library that makes standard epidemiological plots (epidemic curves, rate maps and survival curves) easy to produce, and hard to get wrong."
-tech: ["Python", "Matplotlib", "NumPy", "Pandas", "SciPy", "GeoPandas", "Shapely", "Pytest", "Ruff", "Mypy", "Pixi", "Sphinx", "Google Colab", "GitHub Pages", "Git", "GitHub", "Generative AI (GenAI)"]
+tech: ["Python", "Matplotlib", "NumPy", "pandas", "SciPy", "GeoPandas", "Shapely", "Pytest", "Ruff", "Mypy", "Pixi", "Sphinx", "Google Colab", "GitHub Pages", "Git", "GitHub", "Generative AI (GenAI)"]
 docsUrl: "https://leehart3000.github.io/epiplot/"
 packageUrl: "https://pypi.org/project/epiplot/"
 repoUrl: "https://github.com/leehart3000/epiplot"
