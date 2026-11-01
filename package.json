@@ -19,7 +19,7 @@
     "rehype-external-links": "^3.0.0"
   },
   "devDependencies": {
-    "wrangler": "^4.144.0"
+    "wrangler": "^4.155.0"
   },
   "overrides": {
     "vite": "^7"
