@@ -13,6 +13,7 @@ const projects = defineCollection({
     liveUrl: z.string().url().optional(),
     demoUrl: z.string().url().optional(),
     docsUrl: z.string().url().optional(),
+    packageUrl: z.string().url().optional(),
     repoUrl: z.string().url().optional(),
     repoIsPrivate: z.boolean().default(false),
     logo: z.string().optional(),

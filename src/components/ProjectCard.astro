@@ -16,6 +16,14 @@ interface Props {
 
 const { project, linkTitle = false } = Astro.props;
 const detailHref = `/projects/${project.id}`;
+const packageUrl = project.data.packageUrl;
+const packageLabel = !packageUrl
+  ? ''
+  : packageUrl.includes('pypi.org')
+    ? 'PyPI package'
+    : packageUrl.includes('npmjs.com')
+      ? 'npm package'
+      : 'Package';
 const hasBody = (project.body ?? '').trim().length > 0;
 const screenshots = project.data.screenshots ?? [];
 const hasScreenshots = screenshots.length > 0;
@@ -102,6 +110,9 @@ function resolveTechColor(t: string): string {
     )}
     {project.data.docsUrl && (
       <>📖&nbsp;Documentation: <a href={project.data.docsUrl} target="_blank" rel="noopener noreferrer">{project.data.docsUrl}</a><br /></>
+    )}
+    {packageUrl && (
+      <>📦&nbsp;{packageLabel}: <a href={packageUrl} target="_blank" rel="noopener noreferrer">{packageUrl}</a><br /></>
     )}
     {project.data.repoUrl && (
       project.data.repoIsPrivate ? (
