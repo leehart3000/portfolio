@@ -15,6 +15,8 @@ const projects = defineCollection({
     docsUrl: z.string().url().optional(),
     packageUrl: z.string().url().optional(),
     repoUrl: z.string().url().optional(),
+    // A read-only copy of the repo elsewhere, e.g. a GitHub mirror of a GitLab repo.
+    mirrorUrl: z.string().url().optional(),
     repoIsPrivate: z.boolean().default(false),
     logo: z.string().optional(),
     logoDark: z.string().optional(),

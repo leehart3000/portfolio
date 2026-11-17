@@ -6,6 +6,7 @@ summary: "ProtoELN is a prototype Electronic Lab Notebook (ELN) for experiment w
 liveUrl: "https://protoeln.org"
 tech: ["TypeScript", "JavaScript", "Vue.js", "Vue Router", "TanStack Query", "Tiptap", "Tailwind CSS", "HTML", "CSS", "Vite", "Node.js", "Express", "MongoDB", "Mongoose", "JSON", "REST", "API", "OAuth", "JSON Web Token (JWT)", "Cloudflare", "Cloudflare Workers", "Cloudflare Durable Objects", "Cloudflare R2", "Cloudflare Wrangler", "Vitest", "Playwright", "ESLint", "Prettier", "pnpm", "just", "Python", "GitLab", "CI/CD", "Markdown", "Mermaid", "Electronic Lab Notebook (ELN)", "Git", "GitHub", "Microsoft Visual Studio Code (VS Code)", "Generative AI (GenAI)"]
 repoUrl: "https://gitlab.com/leehart3000/protoeln"
+mirrorUrl: "https://github.com/leehart3000/protoeln"
 repoIsPrivate: false
 logo: "/logos/protoeln.svg"
 logoDark: "/logos/protoeln-dark.svg"

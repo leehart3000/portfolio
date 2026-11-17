@@ -121,6 +121,9 @@ function resolveTechColor(t: string): string {
         <>📂&nbsp;Public repo: <a href={project.data.repoUrl} target="_blank" rel="noopener noreferrer">{project.data.repoUrl}</a></>
       )
     )}
+    {project.data.mirrorUrl && (
+      <><br />🪞&nbsp;Mirror repo: <a href={project.data.mirrorUrl} target="_blank" rel="noopener noreferrer">{project.data.mirrorUrl}</a></>
+    )}
   </p>
 
   {project.data.tech.length > 0 && (
