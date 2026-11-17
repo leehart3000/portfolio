@@ -15,7 +15,7 @@ screenshots:
   - "../../assets/screenshots/codonandon-scores.jpg"
 ---
 
-CodonAndon is a falling-blocks game with a biology twist. Every square is an mRNA base (A, U, G or C), and each cleared row is read as a strand of mRNA. A start codon (AUG) begins a chain, each following codon adds an amino acid using the standard genetic code, and a stop codon (UAA, UAG or UGA) banks the chain for bonus points.
+CodonAndon, previously named Tetraminos, is a falling-blocks game with a biology twist. Every square is an mRNA base (A, U, G or C), and each cleared row is read as a strand of mRNA. A start codon (AUG) begins a chain, each following codon adds an amino acid using the standard genetic code, and a stop codon (UAA, UAG or UGA) banks the chain for bonus points.
 
 Features include:
 
